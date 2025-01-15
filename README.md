@@ -1,4 +1,4 @@
-# Giftly
+# Giftly 🎁
 
 Giftly is a simplified wish list management app that helps users create, manage and share personalized wish lists for any occasion. By simplifying the process of giving and recieving gifts, Giftly ensures that every gift is meaningful and values to the user. 
 
@@ -40,82 +40,8 @@ I am going to use the required technologies in the following ways.
 - **HTML** - Structure the pages for login, dashboard, and wish list management. Semantic elements for improved accessibility.
 - **CSS** -  Responsive styling and animations for buttons and modals to enhance user experience.
 - **React** - Build reusable components for login forms, wish list items, and dashboards. Use React Router for navigation.
-- **Service** - Call the Fake Store API for product suggestions. Provide backend endpoints for managing wish lists and user authentication.
-- **DB/Login** - Use SQLite to store user accounts and wish lists, ensuring data security with encrypted credentials.
+- **Service** -Provide backend endpoints for managing wish lists and user authentication.
+
+- **DB/Login** - Store user accounts and wish lists, ensuring data security with encrypted credentials.
 - **WebSocket** - Enable real-time notifications for shared wish list updates and display changes instantly.
 
-## 🚀 AWS deliverable
-
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
-
-## 🚀 HTML deliverable
-
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
-
-## 🚀 CSS deliverable
-
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
-
-## 🚀 React part 1: Routing deliverable
-
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - Routing between login and voting components.
-
-## 🚀 React part 2: Reactivity
-
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
-
-## 🚀 Service deliverable
-
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-
-## 🚀 DB/Login deliverable
-
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **User registration** - I did not complete this part of the deliverable.
-- [ ] **User login and logout** - I did not complete this part of the deliverable.
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Restricts functionality based on authentication** - I did not complete this part of the deliverable.
-
-## 🚀 WebSocket deliverable
-
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
