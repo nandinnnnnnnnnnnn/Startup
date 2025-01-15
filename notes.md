@@ -1,7 +1,10 @@
 # CS 260 Notes
 
 [My startup - Simon](https://simon.cs260.click)
+Hey this is my first note for github environment!!!!!
 
+
+HEYYY this is change 
 ## Helpful links
 
 - [Course instruction](https://github.com/webprogramming260)
