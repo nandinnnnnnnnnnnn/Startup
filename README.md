@@ -18,8 +18,8 @@ Tired of guessing what gifts your loved ones want? With Giftly, you can create, 
 
 ### Design
 
-![Design image](Startup/MainPage.png)
-![Design image](Startup/Search.png)
+![Design image](MainPage.png)
+![Design image](Search.png)
 
 
 
