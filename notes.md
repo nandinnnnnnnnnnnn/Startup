@@ -1,21 +1,19 @@
 # CS 260 Notes
 
-[My startup - Simon](https://simon.cs260.click)
-
-## Helpful links
-
-- [Course instruction](https://github.com/webprogramming260)
-- [Canvas](https://byu.instructure.com)
-- [MDN](https://developer.mozilla.org)
+[My startup - Giftly](https://justgiftly.com)
 
 ## AWS
 
-My IP address is: 54.81.96.130
-Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
+My IP address is: 3.88.81.212
+Launching my AMI I initially put it on a private subnet. First my domain name was not connecting with the server, it was showing correct and synced with the server, but the problem was in the name servers were not matching with dns and domain registrar's. But it worked eventually after matching name servers. 
 
 ## Caddy
 
-No problems worked just like it said in the [instruction](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
+I made my justgiftly https. 
+
+# Assignment 1: Simon HTML Notes
+Locating and managing the `.pem` file for SSH access.
+Understanding how Route 53 DNS settings and subdomains connect to the server. Understood basic structure of html. ained experience deploying a static HTML application to an AWS server. 
 
 ## HTML
 
