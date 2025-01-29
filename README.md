@@ -52,7 +52,7 @@ For this deliverable, I built out the structure of my application using HTML.
 - [x] **HTML Pages** - Multiple HTML pages representing the core structure:
   - `index.html`: Home page with an introduction and login form.
   - `wishlist.html`: Contains the wish list and cart functionality.
-    - `about.html`: What our website is about.
+  - `about.html`: What the website is about.
 
 - [x] **Links** - The login page links to the wish list page. The wish list page contains links to manage, add, or remove items.
 
