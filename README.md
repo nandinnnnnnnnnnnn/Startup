@@ -18,8 +18,8 @@ Tired of guessing what gifts your loved ones want? With Giftly, you can create, 
 
 ### Design
 
-![Design image](MainPage.png)
-![Design image](Search.png)
+![Design image](images/MainPage.png)
+![Design image](images/Search.png)
 
 
 
@@ -45,3 +45,21 @@ I am going to use the required technologies in the following ways.
 - **DB/Login** - Store user accounts and wish lists, ensuring data security with encrypted credentials.
 - **WebSocket** - Enable real-time notifications for shared wish list updates and display changes instantly.
 
+
+###HTML Deliverable
+For this deliverable, I built out the structure of my application using HTML.
+
+- [x] **HTML Pages** - Multiple HTML pages representing the core structure:
+  - `index.html`: Home page with an introduction and login form.
+  - `wishlist.html`: Contains the wish list and cart functionality.
+    - `about.html`: What our website is about.
+
+- [x] **Links** - The login page links to the wish list page. The wish list page contains links to manage, add, or remove items.
+
+- [x] **Text** - Each section includes a clear textual description of the app’s functionality, including login, wish list management, and real-time updates.
+
+- [x] **Images** - Application includes relevant image on about.html
+
+- [x] **DB/Login** - A login input form with a username and password field. The wish list represents stored data that will later be managed.
+
+- [x] **WebSocket** - A real-time updates section to show when a user modifies a wish list or purchases an item.
