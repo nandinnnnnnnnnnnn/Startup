@@ -55,6 +55,9 @@ With **Giftly**, you can **create, manage, and share wish lists** effortlessly. 
 | **Database & WebSockets (Planned)** | Real-time wish list updates & data storage. |
 
 ---
+### Third-Party API Integration
+Giftly will integrate with **[Amazon Product API](https://developer.amazon.com/)** to fetch recommended gifts based on user preferences.  
+This will allow users to add products **directly from Amazon to their wish lists**.
 
 ## **📎 Links & Resources**
 🔗 **GitHub Repository:** [Giftly Repository](https://github.com/nandinnnnnnnnnnnn/Startup)  
