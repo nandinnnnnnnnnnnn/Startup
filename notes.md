@@ -2,29 +2,50 @@
 
 [My startup - Giftly](https://justgiftly.com)
 
-## AWS
+---
 
-My IP address is: 3.88.81.212
-Launching my AMI I initially put it on a private subnet. First my domain name was not connecting with the server, it was showing correct and synced with the server, but the problem was in the name servers were not matching with dns and domain registrar's. But it worked eventually after matching name servers. 
+## **🚀 AWS & Deployment**
+🔹 **IP Address:** 3.88.81.212  
+🔹 Fixed **domain issues** by ensuring **DNS & domain registrar name servers matched**.  
 
-## Caddy
+---
 
-I made my justgiftly https. 
+## **🔐 Caddy & HTTPS**
+✅ **Implemented HTTPS for JustGiftly** using Caddy.  
+✅ Learned about SSL certificates and automated domain validation.  
 
-# Assignment 1: Simon HTML Notes
-Locating and managing the `.pem` file for SSH access.
-Understanding how Route 53 DNS settings and subdomains connect to the server. Understood basic structure of html. ained experience deploying a static HTML application to an AWS server. 
+---
 
-## HTML
+## **🖥️ HTML Deliverable**
+✅ Used **semantic elements** (`header`, `footer`, `main`, `nav`).  
+✅ **Smooth navigation** between views using the `<a>` element.  
+✅ **Minor issue**: Header & footer **code duplication** (will be cleaned in React).  
 
-This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
+---
 
-The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
+## **🎨 CSS Deliverable**
+✅ **Soft Pink Theme** – Consistent color palette for UI.  
+✅ **Interactive Product Cards** – Transparent styling, hover effects & box shadows.  
+✅ **Custom Buttons** – Rounded edges, gradient effects & smooth transitions.  
+✅ **Sticky Footer Fix** – Ensured the footer stays at the bottom of the page.  
+---
 
-## CSS
+## **🛠️ Git & Version Control Fixes**
+🔹 **Rebased & resolved merge conflicts** after a Git push rejection.  
+🔹 **Moved files from the `Startup/` subfolder** back to the root directory.  
+🔹 Learned **force pushing risks** and how to avoid conflicts with `git rebase --continue`.  
+
+---
+
+## **⚛️ React Part 1: Routing**
+🚀 **Planned:**
 
 
-## React Part 1: Routing
+---
 
+## **⚡ React Part 2: Reactivity**
+🚀 **Planned:**
+ 
 
-## React Part 2: Reactivity
+---
+
