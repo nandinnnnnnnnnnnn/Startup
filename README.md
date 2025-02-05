@@ -1,4 +1,4 @@
-# 🎁 Giftly - Simplified Wish List Management
+# 🎁 Giftly 
 
 **Giftly** is a wish list app that helps users create, manage, and share personalized wish lists for any occasion. By simplifying gift-giving, Giftly ensures every gift is meaningful.
 
@@ -58,7 +58,6 @@ With **Giftly**, you can **create, manage, and share wish lists** effortlessly. 
 
 ## **📎 Links & Resources**
 🔗 **GitHub Repository:** [Giftly Repository](https://github.com/nandinnnnnnnnnnnn/Startup)  
-🔗 **Live Demo (if applicable):** _Coming soon_  
 
 ---
 
