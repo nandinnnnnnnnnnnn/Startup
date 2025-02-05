@@ -1,65 +1,66 @@
-# Giftly 🎁
+# 🎁 Giftly - Simplified Wish List Management
 
-Giftly is a simplified wish list management app that helps users create, manage and share personalized wish lists for any occasion. By simplifying the process of giving and recieving gifts, Giftly ensures that every gift is meaningful and values to the user. 
+**Giftly** is a wish list app that helps users create, manage, and share personalized wish lists for any occasion. By simplifying gift-giving, Giftly ensures every gift is meaningful.
 
-## 🚀 Specification Deliverable
+---
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+## **📌 Deliverables**
+For this deliverable, I completed the following:  
+✅ **Built & structured HTML pages** (`index.html`, `wishlist.html`, `about.html`).  
+✅ **Designed a fully styled UI using CSS & Bootstrap.**  
+✅ **Implemented interactive buttons, product cards & a shimmering text effect.**  
+✅ **Ensured mobile responsiveness & accessibility.**  
 
-- [x] Proper use of Markdown
-- [x] A concise and compelling elevator pitch
-- [x] Description of key features
-- [x] Description of how you will use each technology
-- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+---
 
-### Elevator pitch
+## **🚀 Elevator Pitch**
+🎁 **Tired of guessing what gifts your loved ones want?**  
+With **Giftly**, you can **create, manage, and share wish lists** effortlessly. Whether for birthdays, holidays, or special occasions, Giftly takes the stress out of gift-giving.
 
-Tired of guessing what gifts your loved ones want? With Giftly, you can create, manage, and share personalized wish lists for any occasion. Whether it’s birthdays, holidays, or just because, Giftly takes the stress out of gift-giving and makes it easy for everyone to give and receive meaningful presents.
+---
 
-### Design
+## **🎨 Design**
+### **Main Page UI**
+![Main Page](images/MainPage.png)
 
-![Design image](images/MainPage.png)
-![Design image](images/Search.png)
+### **Search Page UI**
+![Search Page](images/Search.png)
 
+---
 
+## **✨ Key Features**
+- **Wish List Management** – Add, edit, and delete wish list items.  
+- **User Authentication** – Sign up and log in securely.  
+- **Shareable Links** – Easily share wish lists with friends & family.  
+- **Database Storage (Planned)** – Store wish lists for easy access.  
 
-### Key features
+---
 
-- User Authentication: Sign up and log in to access wish lists.
+## **🎀 CSS Enhancements**
+✅ **Soft Pink Theme** – Aesthetic gradient background & deep pink accents.  
+✅ **Stylish Navbar & Footer** – Sticky navigation & a polished footer design.  
+✅ **Interactive Product Cards** – Transparent design, hover effects & shadows.  
+✅ **Custom Buttons** – Rounded, animated buttons with smooth transitions.  
+✅ **Shimmering Headline Effect** – Animated glow for key sections.  
+✅ **Fully Responsive** – Optimized for mobile & desktop devices.  
 
-- Wish List Management: Add, edit, and delete wish list items.
+---
 
-- Sharing Made Simple: Generate sharable links for wish lists.
+## **🛠️ Technologies Used**
+| Technology | Purpose |
+|------------|---------|
+| **HTML** | Structured login, dashboard, and wish list pages. |
+| **CSS & Bootstrap** | Created responsive UI with animations. |
+| **JavaScript (Planned)** | Add interactivity for wish list management. |
+| **Database & WebSockets (Planned)** | Real-time wish list updates & data storage. |
 
-- Storage: Store wish lists in a database for easy access.
+---
 
-### Technologies
+## **📎 Links & Resources**
+🔗 **GitHub Repository:** [Giftly Repository](https://github.com/nandinnnnnnnnnnnn/Startup)  
+🔗 **Live Demo (if applicable):** _Coming soon_  
 
-I am going to use the required technologies in the following ways.
+---
 
-- **HTML** - Structure the pages for login, dashboard, and wish list management. Semantic elements for improved accessibility.
-- **CSS** -  Responsive styling and animations for buttons and modals to enhance user experience.
-- **React** - Build reusable components for login forms, wish list items, and dashboards. Use React Router for navigation.
-- **Service** -Provide backend endpoints for managing wish lists and user authentication.
-
-- **DB/Login** - Store user accounts and wish lists, ensuring data security with encrypted credentials.
-- **WebSocket** - Enable real-time notifications for shared wish list updates and display changes instantly.
-
-
-###HTML Deliverable
-For this deliverable, I built out the structure of my application using HTML.
-
-- [x] **HTML Pages** - Multiple HTML pages representing the core structure:
-  - `index.html`: Home page with an introduction and login form.
-  - `wishlist.html`: Contains the wish list and cart functionality.
-  - `about.html`: What the website is about.
-
-- [x] **Links** - The login page links to the wish list page. The wish list page contains links to manage, add, or remove items.
-
-- [x] **Text** - Each section includes a clear textual description of the app’s functionality, including login, wish list management, and real-time updates.
-
-- [x] **Images** - Application includes relevant image on about.html
-
-- [x] **DB/Login** - A login input form with a username and password field. The wish list represents stored data that will later be managed.
-
-- [x] **WebSocket** - A real-time updates section to show when a user modifies a wish list or purchases an item.
+## **💖 Made with Love by Nandintsetseg Batsaikhan**
+🎀 _Gift-giving, made simple and magical!_ ✨  
