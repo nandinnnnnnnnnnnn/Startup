@@ -1,0 +1,33 @@
+{
+  "name": "startup-nandintsetseg-cs260",
+  "version": "1.0.0",
+  "description": "**Giftly** is a wish list app that helps users create, manage, and share personalized wish lists for any occasion. By simplifying gift-giving, Giftly ensures every gift is meaningful.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nandinnnnnnnnnnnn/Startup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nandinnnnnnnnnnnn/Startup/issues"
+  },
+  "homepage": "https://github.com/nandinnnnnnnnnnnn/Startup#readme",
+  "devDependencies": {
+    "vite": "^6.1.0"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "bootstrap": "^5.3.3",
+    "react": "^19.0.0",
+    "react-bootstrap": "^2.10.9",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.5"
+  }
+}
