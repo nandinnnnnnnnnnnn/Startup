@@ -63,8 +63,8 @@ function Navbar() {
                     <li className="nav-item"><Link className="nav-link" to="/features">Wish Lists</Link></li>
                 </ul>
                 <div className="nav-buttons">
-                <Link to="/login" className="btn-login">Login</Link>
-                <Link to="/signup" className="btn-signup">Sign Up</Link>
+                <Link to="/" className="btn-login">Login</Link>
+                <Link to="/" className="btn-signup">Sign Up</Link>
 
                 </div>
             </div> 

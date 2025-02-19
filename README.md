@@ -6,10 +6,10 @@
 
 ## **📌 Deliverables**
 For this deliverable, I completed the following:  
-✅ **Built & structured HTML pages** (`index.html`, `wishlist.html`, `about.html`).  
-✅ **Designed a fully styled UI using CSS & Bootstrap.**  
-✅ **Implemented interactive buttons, product cards & a shimmering text effect.**  
+✅ **Built the application using React & Vite.**  
+✅ **Styled the UI using Bootstrap for responsiveness.**  
 ✅ **Ensured mobile responsiveness & accessibility.**  
+✅ **Simon React deployed to your production environment.**  
 
 ---
 
@@ -21,10 +21,10 @@ With **Giftly**, you can **create, manage, and share wish lists** effortlessly. 
 
 ## **🎨 Design**
 ### **Main Page UI**
-![Main Page](images/MainPage.png)
+![Main Page](public/images/MainPage.png)
 
 ### **Search Page UI**
-![Search Page](images/Search.png)
+![Search Page](public/images/Search.png)
 
 ---
 
@@ -46,13 +46,31 @@ With **Giftly**, you can **create, manage, and share wish lists** effortlessly. 
 
 ---
 
+## 📌 **React Phase 1: Routing Deliverable**  
+
+For this deliverable, I used **JavaScript and React** 
+✅ **Bundled using Vite** – So amazing what Vite does! Bundling, transpiling, minifying, and HMR.  
+✅ **Components** – The app is structured using React components.  
+✅ **Router** – Implemented routing between pages such as Home, About, and Wish Lists.  
+✅ **Bundled and transpiled** – Done with Vite!  
+✅ **Implemented core components**:
+  - **Navbar** – Navigation links with a responsive menu.  
+  - **Home Page** – Carousel, featured products, and call-to-action.  
+  - **Wish Lists** – A page displaying stored wish lists. 
+
+
 ## **🛠️ Technologies Used**
 | Technology | Purpose |
 |------------|---------|
 | **HTML** | Structured login, dashboard, and wish list pages. |
-| **CSS & Bootstrap** | Created responsive UI with animations. |
-| **JavaScript (Planned)** | Add interactivity for wish list management. |
+| **CSS & Bootstrap** | Created responsive UI. |
+| **React.js** | Component-based UI framework |
+| **Vite** | Fast builds and optimized performance |
+| **Caddy** | Web server for hosting |
+| **AWS EC2** | Deployment and hosting |
 | **Database & WebSockets (Planned)** | Real-time wish list updates & data storage. |
+
+
 
 ---
 ### Third-Party API Integration
