@@ -16,7 +16,7 @@ import giftPic from "/images/gift_pic.jpg";
 import carousel1 from "/images/carousel1.png";
 import carousel2 from "/images/caraousel2.png";
 
-// Home Page Component
+// Home Page Comp
 function Home() {
     return (
         <div className="content">
