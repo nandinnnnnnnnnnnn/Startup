@@ -19,7 +19,7 @@ function Login({ onLogin }) {
             return;
         }
 
-        // 🔐 Compare entered password with the stored encrypted password
+        //Compare password with the stored encrypted password
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) {
             setError("Incorrect password!");
