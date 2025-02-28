@@ -1,91 +1,73 @@
-import React from "react";
-
-// Import product images
-import product1 from "/images/9b3aae4cf90f897799a5ed357d60e09d.jpeg";
-import product2 from "/images/rocher.jpg";
-import product3 from "/images/flower.jpeg";
-
-// Product data
-const products = [
-    {
-        id: 1,
-        category: "Bakery & Biscuits",
-        title: "NutriChoice Digestive",
-        rating: "⭐⭐⭐⭐☆",
-        ratingScore: "4.3 (4)",
-        price: "$24",
-        image: product1,
-    },
-    {
-        id: 2,
-        category: "Chocolates",
-        title: "Ferrero Rocher",
-        rating: "⭐⭐⭐⭐⭐",
-        ratingScore: "4.8 (10)",
-        price: "$15",
-        image: product2,
-    },
-    {
-        id: 3,
-        category: "Flower",
-        title: "Bouquet",
-        rating: "⭐⭐⭐⭐☆",
-        ratingScore: "4.5 (8)",
-        price: "$20",
-        image: product3,
-    },
-    {
-        id: 4,
-        category: "Flower",
-        title: "Bouquet",
-        rating: "⭐⭐⭐⭐☆",
-        ratingScore: "4.5 (8)",
-        price: "$20",
-        image: product3,
-    },
-    {
-        id: 5,
-        category: "Flower",
-        title: "Bouquet",
-        rating: "⭐⭐⭐⭐☆",
-        ratingScore: "4.5 (8)",
-        price: "$20",
-        image: product3,
-    },
-    {
-        id: 6,
-        category: "Flower",
-        title: "Bouquet",
-        rating: "⭐⭐⭐⭐☆",
-        ratingScore: "4.5 (8)",
-        price: "$20",
-        image: product3,
-    },
-];
+import React, { useState, useEffect } from "react";
 
 function ProductList() {
+    const [products, setProducts] = useState([]);
+    const [wishlist, setWishlist] = useState([]);
+
+    useEffect(() => {
+        fetch("https://fakestoreapi.com/products") // Fetching products from API
+            .then((res) => res.json())
+            .then((data) => setProducts(data));
+
+        const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        setWishlist(savedWishlist);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    }, [wishlist]);
+
+    const addToWishlist = (product) => {
+        if (!wishlist.some((item) => item.id === product.id)) {
+            setWishlist([...wishlist, product]);
+        }
+    };
+
+    const removeFromWishlist = (productId) => {
+        setWishlist(wishlist.filter((item) => item.id !== productId));
+    };
+
     return (
         <div className="container">
-            <div className="row">
+            <h2 className="wishlist_text">🛍️ Shop Our Gifts 🛍️</h2>
+            <div className="product-container">
                 {products.map((product) => (
-                    <div className="col-md-4" key={product.id}>
-                        <div className="card product-card">
-                            <img src={product.image} className="card-img-top" alt={product.title} />
-                            <div className="card-body">
-                                <p className="category">{product.category}</p>
-                                <h5 className="product-title">{product.title}</h5>
-                                <div className="rating">
-                                    {product.rating} <span className="rating-score">{product.ratingScore}</span>
-                                </div>
-                                <div className="price">
-                                    <span className="current-price">{product.price}</span>
-                                </div>
-                                <button className="custom-btn add-to-cart">+ Add</button>
-                            </div>
+                    <div className="product-card" key={product.id}>
+                        <img src={product.image} alt={product.title} />
+                        <h5>{product.title}</h5>
+                        <p>${product.price}</p>
+                        <div className="button-container">
+                            {wishlist.some((item) => item.id === product.id) ? (
+                                <button onClick={() => removeFromWishlist(product.id)} className="btn-remove">
+                                    ❌ Remove from Wishlist
+                                </button>
+                            ) : (
+                                <button onClick={() => addToWishlist(product)} className="btn-add">
+                                    💖 Add 💖
+                                </button>
+                            )}
                         </div>
+
                     </div>
                 ))}
             </div>
+
+
+            <h3 className="wishlist_text">🎁 Your Wishlist</h3>
+                <ul>
+                    {wishlist.length > 0 ? (
+                        wishlist.map((item) => (
+                            <li key={item.id} className="wishlist-item">
+                                {item.title} - ${item.price}
+                                <button onClick={() => removeFromWishlist(item.id)} className="wishlist-remove">
+                                    ❌ Remove
+                                </button>
+                            </li>
+                        ))
+                    ) : (
+                        <p>Your wishlist is empty</p>
+                    )}
+                </ul>
         </div>
     );
 }

@@ -47,7 +47,7 @@ function Home() {
     );
 }
 
-// Navigation Bar Component
+// Navigation Bar 
 function Navbar({ user, onLogout }) {
   return (
       <nav className="navbar navbar-expand-lg">
@@ -78,7 +78,7 @@ function Navbar({ user, onLogout }) {
   );
 }
 
-// Footer Component
+// Footer 
 function Footer() {
     return (
         <footer className="site-footer">
@@ -90,7 +90,7 @@ function Footer() {
     );
 }
 
-// Main App Component
+// Main App 
 function App() {
   const [user, setUser] = useState(null);
 

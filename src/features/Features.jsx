@@ -1,35 +1,44 @@
-import React from "react";
-
-// Sample wish list data
-const wishLists = [
-    { user: "Alice", listName: "Birthday Gifts", items: "Smartwatch, Headphones" },
-    { user: "Bob", listName: "Christmas List", items: "Books, Travel Backpack" },
-];
+import React, { useState, useEffect } from "react";
 
 function Features() {
+    const [wishlist, setWishlist] = useState([]);
+
+    useEffect(() => {
+        const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        setWishlist(savedWishlist);
+    }, []);
+
+    const removeFromWishlist = (productId) => {
+        const updatedWishlist = wishlist.filter((item) => item.id !== productId);
+        setWishlist(updatedWishlist);
+        localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+    };
+
     return (
         <div className="content container my-5">
-            <h2 className="text-center section-heading">📊 Stored Wish Lists</h2>
-            <div className="table-responsive">
-                <table className="table table-bordered table-hover wish-list-table">
-                    <thead className="table-header">
-                        <tr>
-                            <th>User</th>
-                            <th>Wish List Name</th>
-                            <th>Items</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {wishLists.map((wishlist, index) => (
-                            <tr key={index}>
-                                <td>{wishlist.user}</td>
-                                <td>{wishlist.listName}</td>
-                                <td>{wishlist.items}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <h2 className="text-center section-heading">🎁 Your Wishlist</h2>
+
+            {wishlist.length === 0 ? (
+                <p className="text-center">Your wishlist is empty 😢</p>
+            ) : (
+                <div className="product-container">
+                    {wishlist.map((item) => (
+                        <div className="product-card" key={item.id}>
+                            <img src={item.image} alt={item.title} />
+                            <h5>{item.title}</h5>
+                            <p>${item.price}</p>
+                            <div className="button-container">
+                                <button
+                                    onClick={() => removeFromWishlist(item.id)}
+                                    className="wishlist-remove"
+                                >
+                                    ❌ Remove
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
