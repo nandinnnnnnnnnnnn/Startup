@@ -7,9 +7,11 @@
 ## **📌 Deliverables**
 For this deliverable, I completed the following:  
 ✅ **Built the application using React & Vite.**  
-✅ **Styled the UI using Bootstrap for responsiveness.**  
-✅ **Ensured mobile responsiveness & accessibility.**  
-✅ **Simon React deployed to your production environment.**  
+✅ **Better wishlist functionality with local storage.**  
+✅ **Created a dedicated Wishlist page to manage saved gifts.**  
+✅ **Encrypted user passwords with `bcryptjs` for security ^^.**  
+✅ **Implemented "Forgot Password" feature for password reset.**  
+✅ **Simon React deployed to production environment.**  
 
 ---
 
@@ -26,12 +28,18 @@ With **Giftly**, you can **create, manage, and share wish lists** effortlessly. 
 ### **Search Page UI**
 ![Search Page](public/images/Search.png)
 
+### **Wishlist Page UI**
+![Wishlist Page](public/images/Wishlist.png)
+
 ---
 
 ## **✨ Key Features**
-- **Wish List Management** – Add, edit, and delete wish list items.  
-- **User Authentication** – Sign up and log in securely.  
-- **Shareable Links** – Easily share wish lists with friends & family.  
+- **API-Driven Product Listing** – Fetches live products using a third-party API (currently not from Amazon yet ^^).  
+- **Wish List Management** – Add, edit, and delete wish list items (Future it will saved on the users account uniquely).  
+- **User Authentication** – Sign up and log in securely with encrypted passwords.  
+- **Forgot Password Feature** – Reset passwords.  
+- **Wishlist Page** – Users can now view and manage their wishlists in a wishlist page.  
+- **Persistent Storage** – User data and wishlist items are stored even after logout.  
 - **Database Storage (Planned)** – Store wish lists for easy access.  
 
 ---
@@ -41,23 +49,25 @@ With **Giftly**, you can **create, manage, and share wish lists** effortlessly. 
 ✅ **Stylish Navbar & Footer** – Sticky navigation & a polished footer design.  
 ✅ **Interactive Product Cards** – Transparent design, hover effects & shadows.  
 ✅ **Custom Buttons** – Rounded, animated buttons with smooth transitions.  
-✅ **Shimmering Headline Effect** – Animated glow for key sections.  
-✅ **Fully Responsive** – Optimized for mobile & desktop devices.  
+✅ **Responsive** – Optimized for mobile & desktop devices.  
 
 ---
 
-## 📌 **React Phase 1: Routing Deliverable**  
+## 📌 **React Phase 2: API & Wishlist Enhancements**  
 
-For this deliverable, I used **JavaScript and React** 
-✅ **Bundled using Vite** – So amazing what Vite does! Bundling, transpiling, minifying, and HMR.  
-✅ **Components** – The app is structured using React components.  
-✅ **Router** – Implemented routing between pages such as Home, About, and Wish Lists.  
-✅ **Bundled and transpiled** – Done with Vite!  
-✅ **Implemented core components**:
-  - **Navbar** – Navigation links with a responsive menu.  
-  - **Home Page** – Carousel, featured products, and call-to-action.  
-  - **Wish Lists** – A page displaying stored wish lists. 
+For this deliverable, I implemented:  
+✅ **API Integration** – Products are now loaded from an external API instead of hardcoded data.  
+✅ **Wishlist Page** – A page for users to manage their saved gifts.  
+✅ **Persistent Wishlist Storage** – Wishlist items are stored in `localStorage` so they remain after logout.  
+✅ **Improved Authentication** –  
+  - **Sign Up with Encrypted Passwords** (`bcryptjs`).  
+  - **Login Verification** – Passwords are securely checked.  
+  - **Forgot Password Feature** – Users can reset their passwords without an email.  
+✅ **Bug Fixes & UI Improvements** –  
+  - Improved responsiveness of product grids.  
+  - Consistent button styles across the site.  
 
+---
 
 ## **🛠️ Technologies Used**
 | Technology | Purpose |
@@ -66,16 +76,18 @@ For this deliverable, I used **JavaScript and React**
 | **CSS & Bootstrap** | Created responsive UI. |
 | **React.js** | Component-based UI framework |
 | **Vite** | Fast builds and optimized performance |
+| **bcryptjs** | Secure password encryption |
 | **Caddy** | Web server for hosting |
 | **AWS EC2** | Deployment and hosting |
-| **Database & WebSockets (Planned)** | Real-time wish list updates & data storage. |
-
-
+| **Database & WebSockets (Planned)** | Real-time wish list updates & data storage from Amazon ^^. |  
 
 ---
-### Third-Party API Integration
-Giftly will integrate with **[Amazon Product API](https://developer.amazon.com/)** to fetch recommended gifts based on user preferences.  
-This will allow users to add products **directly from Amazon to their wish lists**.
+
+## **🔗 Third-Party API Integration**
+Giftly integrates with **[Fake Store API](https://fakestoreapi.com/)** to fetch live product data.  
+Future integrations include **Amazon Product API** for adding real gifts directly to wish lists ^^.
+
+---
 
 ## **📎 Links & Resources**
 🔗 **GitHub Repository:** [Giftly Repository](https://github.com/nandinnnnnnnnnnnn/Startup)  
