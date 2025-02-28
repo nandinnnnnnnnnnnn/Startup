@@ -204,7 +204,7 @@ html, body {
 /* Hover Effect 
 .custom-btn:hover {
     background: linear-gradient(to right, #ff85a2, #ff6699);
-    transform: scale(1.05); /* Slight enlargement */
+    transform: scale(1.05); /* Slight enlargement 
     box-shadow: 0px 6px 10px rgba(255, 133, 162, 0.4);
 }
 
@@ -213,51 +213,6 @@ html, body {
     transform: scale(0.95);
 }
 */
-
-
-/* Section Styling */
-#database {
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(255, 133, 162, 0.3);
-}
-
-.section-heading {
-    font-family: "Poppins", sans-serif;
-    color: var(--bs-dark);
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-/* Table Styling */
-.wish-list-table {
-    background-color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(255, 133, 162, 0.3);
-}
-
-/* Table Header */
-.table-header {
-    background: var(--bs-primary);
-    color: white;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Table Rows */
-.wish-list-table tbody tr:hover {
-    background-color: rgba(255, 182, 193, 0.2); /* Light pink hover */
-    transition: 0.3s ease-in-out;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    #database {
-        padding: 20px;
-    }
-}
-
 
 /* About Section Styling */
 .about-section {
@@ -363,7 +318,7 @@ footer a {
     font-family: 'pixelify sans'; 
     font-size: 16px;
     font-weight: bold;
-    padding: 12px 20px;
+    padding: 10px 20px;
     border: none;
     border-radius: 25px;
     cursor: pointer;
@@ -571,6 +526,7 @@ footer p {
 .product-card {
     width: 250px; 
     background: white;
+    font-family: sans-serif;
     border-radius: 15px;
     padding: 15px;
     box-shadow: 0px 4px 10px rgba(255, 133, 162, 0.3);
