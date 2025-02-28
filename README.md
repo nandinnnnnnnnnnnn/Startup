@@ -1,6 +1,6 @@
 # 🎁 Giftly 
 
-**Giftly** is a wish list app that helps users create, manage, and share personalized wish lists for any occasion. By simplifying gift-giving, Giftly ensures every gift is meaningful.
+**Giftly** is a simplified wish list management app that helps users create, manage and share personalized wish lists for any occasion. By simplifying the process of giving and recieving gifts, Giftly ensures that every gift is meaningful and values to the user. 
 
 ---
 
