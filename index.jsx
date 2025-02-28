@@ -1,12 +1,6 @@
-import React from 'react';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./src/App";  // Import the actual App.jsx
 
-function App() {
-  return (
-    <div>
-      <h1>Welcome to JustGiftly</h1>
-      <p>Your gift ideas start here!</p>
-    </div>
-  );
-}
-
-export default App;
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);

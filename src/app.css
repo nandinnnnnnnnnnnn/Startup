@@ -390,5 +390,119 @@ footer p {
     }
 }
 
+/* 🎨 Login Page Styling */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #fff0f5, #ffb6c1);
+}
 
+.login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(255, 133, 162, 0.3);
+    text-align: center;
+    width: 350px;
+}
 
+.login-box h2 {
+    font-family: 'Pixelify Sans', sans-serif;
+    color: #880e4f;
+    margin-bottom: 20px;
+}
+
+/*Input Field */
+.login-input {
+    font-family: sans-serif;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 2px solid #ff85a2;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.login-input:focus {
+    border-color: #ff6699;
+}
+
+.custom-btn {
+    background: linear-gradient(to right, #ffb6c1, #ff85a2); 
+    color: white;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 6px rgba(255, 133, 162, 0.3);
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.custom-btn:hover {
+    background: linear-gradient(to right, #ff85a2, #ff6699);
+    transform: scale(1.05);
+    box-shadow: 0px 6px 10px rgba(255, 133, 162, 0.4);
+}
+
+.signup-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #880e4f;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* 🚀 Logout Button */
+.btn-logout {
+    background: linear-gradient(to right, #ffb6c1, #ff85a2); /* Soft pink gradient */
+    color: white;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 6px rgba(255, 133, 162, 0.3);
+    text-align: center;
+}
+.btn-logout:hover {
+    background: linear-gradient(to right, #ff85a2, #ff6699);
+    transform: scale(1.05);
+    box-shadow: 0px 6px 10px rgba(255, 133, 162, 0.4);
+}
+.nav-user{
+    font-family: pixelify sans;
+    color:#880e4f;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+
+}
+/*error msg for signup*/
+.error-msg {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}

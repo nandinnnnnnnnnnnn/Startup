@@ -1,5 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./app.css"; 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,10 +6,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import ProductList from "./ProductList";
 import Features from "./features/Features";
 import About from "./about/About";
+import Login from "./Login"; 
+import Signup from "./Signup"; 
+import ForgotPassword from "./ForgotPassword";
 
-
-
-// Import images correctly
 import logo from "/images/Giftly(1).png";
 import giftPic from "/images/gift_pic.jpg";
 import carousel1 from "/images/carousel1.png";
@@ -44,34 +43,40 @@ function Home() {
 
             <h2 className="welcome_msg">Welcome to JustGiftly</h2>
             <ProductList />
-
         </div>
     );
 }
 
 // Navigation Bar Component
-function Navbar() {
-    return (
-        <nav className="navbar navbar-expand-lg">
-            <div className="container">
-                <Link className="navbar-brand" to="/">
-                    <img src={logo} alt="Giftly Logo" />
-                </Link>
-                <ul className="navbar-nav">
-                    <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-                    <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
-                    <li className="nav-item"><Link className="nav-link" to="/features">Wish Lists</Link></li>
-                </ul>
-                <div className="nav-buttons">
-                <Link to="/" className="btn-login">Login</Link>
-                <Link to="/" className="btn-signup">Sign Up</Link>
-
-                </div>
-            </div> 
-        </nav>
-    );
+function Navbar({ user, onLogout }) {
+  return (
+      <nav className="navbar navbar-expand-lg">
+          <div className="container">
+              <Link className="navbar-brand" to="/">
+                  <img src={logo} alt="Giftly Logo" />
+              </Link>
+              <ul className="navbar-nav">
+                  <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+                  <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
+                  <li className="nav-item"><Link className="nav-link" to="/features">Wish Lists</Link></li>
+              </ul>
+              <div className="nav-buttons">
+                  {user ? (
+                      <>
+                          <span className="nav-user">Hello, {user}!</span>
+                          <button onClick={onLogout} className="btn-logout">Logout</button> 
+                          </>
+                  ) : (
+                      <>
+                          <Link to="/login" className="btn-login">Login</Link>
+                          <Link to="/signup" className="btn-signup">Sign Up</Link>
+                      </>
+                  )}
+              </div>
+          </div> 
+      </nav>
+  );
 }
-
 
 // Footer Component
 function Footer() {
@@ -87,21 +92,48 @@ function Footer() {
 
 // Main App Component
 function App() {
-    return (
-        <Router>
-            <div className="page-wrapper">
-                <Navbar />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/features" element={<Features />} />
-                </Routes>
-                <Footer />
-            </div>
-        </Router>
-    );
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+      const savedUser = localStorage.getItem("user");
+      if (savedUser) {
+          setUser(savedUser);
+      }
+  }, []);
+
+  const handleSignup = (username) => {
+    setUser(username);
+    localStorage.setItem("user", username); 
+};
+
+const handleLogin = (username) => {
+    setUser(username);
+    localStorage.setItem("user", username); 
+};
+
+const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+};
+
+
+  return (
+      <Router>
+          <div className="page-wrapper">
+              <Navbar user={user} onLogout={handleLogout} />
+              <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/features" element={<Features />} />
+                  <Route path="/login" element={<Login onLogin={handleLogin} />} />
+                  <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
+                  <Route path="/forgot-password" element={<ForgotPassword />} />
+ 
+              </Routes>
+              <Footer />
+          </div>
+      </Router>
+  );
 }
 
-// Move render call BELOW the App function
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+export default App;
