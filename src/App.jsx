@@ -11,9 +11,9 @@ import Signup from "./Signup";
 import ForgotPassword from "./ForgotPassword";
 
 import logo from "/images/Giftly(1).png";
-import giftPic from "/images/gift_pic.jpg";
-import carousel1 from "/images/carousel1.png";
-import carousel2 from "/images/caraousel2.png";
+import giftPic from "/images/pixel1.jpg";
+import carousel1 from "/images/pixel-gift2.jpg";
+import carousel2 from "/images/giftbear.jpg";
 
 // Home Page Comp
 function Home() {
