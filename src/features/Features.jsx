@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-function Features() {
+function Features(user) {
     const [wishlist, setWishlist] = useState([]);
 
     useEffect(() => {
         const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
         setWishlist(savedWishlist);
-    }, []);
+    }, [user]);
 
     const removeFromWishlist = (productId) => {
         const updatedWishlist = wishlist.filter((item) => item.id !== productId);

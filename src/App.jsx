@@ -123,7 +123,7 @@ const handleLogout = () => {
               <Navbar user={user} onLogout={handleLogout} />
               <Routes>
                   <Route path="/about" element={<About />} />
-                  <Route path="/features" element={<Features />} />
+                  <Route path="/features" element={<Features user={user} />} />
                   <Route path="/login" element={<Login onLogin={handleLogin} />} />
                   <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
