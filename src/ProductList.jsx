@@ -1,36 +1,55 @@
 import React, { useState, useEffect } from "react";
 
-function ProductList() {
+function ProductList({user}) { 
     const [products, setProducts] = useState([]);
     const [wishlist, setWishlist] = useState([]);
-    
+
     useEffect(() => {
-        fetch("https://fakestoreapi.com/products") // ✅ 3rd-party API: Fake Store API
+        fetch("https://fakestoreapi.com/products") // Temporary API for Phase 2
             .then((res) => res.json())
             .then((data) => setProducts(data))
             .catch((error) => console.error("Error fetching products:", error));
     }, []);
+
+    useEffect(() => {
+        if (user) {
+            const savedWishlist = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || [];
+            setWishlist(savedWishlist);
+        }
+    }, [user]); //load wishlist for user
     
 
     useEffect(() => {
-        localStorage.setItem("wishlist", JSON.stringify(wishlist));
-    }, [wishlist]);
+        localStorage.setItem(`wishlist_${user || "guest"}`, JSON.stringify(wishlist));
+    }, [wishlist, user]); //store wishlist for user or guest
+    useEffect(() => {
+        if (user) {
+            const savedWishlist = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || [];
+            setWishlist(savedWishlist);
+        }
+    }, [user]);
 
     const addToWishlist = (product) => {
         if (!user) {
             alert("You must be logged in to add items to your wishlist!");
             return;
         }
+
+        if (wishlist.some((item) => item.id === product.id)) {
+            alert("This item is already in your wishlist!");
+            return;
+        }
     
         const updatedWishlist = [...wishlist, product];
         setWishlist(updatedWishlist);
-        localStorage.setItem(`wishlist_${user}`, JSON.stringify(updatedWishlist));
     };
     
 
     const removeFromWishlist = (productId) => {
-        setWishlist(wishlist.filter((item) => item.id !== productId));
-    };
+
+        const updatedWishlist = wishlist.filter((item) => item.id !== productId);
+        setWishlist(updatedWishlist);
+        };
 
     return (
         <div className="container">

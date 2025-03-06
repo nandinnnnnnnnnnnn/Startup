@@ -16,7 +16,7 @@ import carousel1 from "/images/pixel-gift2.jpg";
 import carousel2 from "/images/giftbear.jpg";
 
 // Home Page Comp
-function Home() {
+function Home({ user }) {
     return (
         <div className="content">
             <div id="carouselExampleRide" className="carousel slide" data-bs-ride="true">
@@ -122,13 +122,12 @@ const handleLogout = () => {
           <div className="page-wrapper">
               <Navbar user={user} onLogout={handleLogout} />
               <Routes>
-                  <Route path="/" element={<Home />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/features" element={<Features />} />
                   <Route path="/login" element={<Login onLogin={handleLogin} />} />
                   <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
- 
+                  <Route path="/" element={<ProductList user={user} />} /> // Add user prop
               </Routes>
               <Footer />
           </div>
