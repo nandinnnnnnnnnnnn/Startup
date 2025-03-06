@@ -11,7 +11,7 @@ function Features(user) {
     const removeFromWishlist = (productId) => {
         const updatedWishlist = wishlist.filter((item) => item.id !== productId);
         setWishlist(updatedWishlist);
-        localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+        localStorage.setItem(`wishlist_${user}`, JSON.stringify(updatedWishlist));    
     };
 
     return (
