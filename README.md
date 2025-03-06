@@ -89,6 +89,12 @@ Future integrations include **Amazon Product API** for adding real gifts directl
 
 ---
 
+## **WebSocket**
+I added WebSocket functionality to show real-time notifications when a user adds an item to their wishlist. This helps users see updates instantly without needing to refresh the page. A temporary WebSocket server is used for now, and it sends messages every time a wishlist is updated.
+
+
+---
+
 ## **📎 Links & Resources**
 🔗 **GitHub Repository:** [Giftly Repository](https://github.com/nandinnnnnnnnnnnn/Startup)  
 
