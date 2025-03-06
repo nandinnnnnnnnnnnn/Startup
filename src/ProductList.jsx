@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 
 function ProductList({user}) { 
     const [products, setProducts] = useState([]);
@@ -18,17 +18,24 @@ function ProductList({user}) {
         }
     }, [user]); //load wishlist for user
     
+    useEffect(() => {
+        if(user){
+            localStorage.setItem('wishlist_${user}', JSON.stringify(wishlist));
+        }}, [wishlist, user]); //store wishlist for user
 
+
+      
     useEffect(() => {
         localStorage.setItem(`wishlist_${user || "guest"}`, JSON.stringify(wishlist));
     }, [wishlist, user]); //store wishlist for user or guest
+/* 
     useEffect(() => {
         if (user) {
             const savedWishlist = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || [];
             setWishlist(savedWishlist);
         }
     }, [user]);
-
+    */
     const addToWishlist = (product) => {
         if (!user) {
             alert("You must be logged in to add items to your wishlist!");
