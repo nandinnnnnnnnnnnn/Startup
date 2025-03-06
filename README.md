@@ -84,8 +84,8 @@ For this deliverable, I implemented:
 ---
 
 ## **🔗 Third-Party API Integration**
-Giftly integrates with **[Fake Store API](https://fakestoreapi.com/)** to fetch live product data.  
-Future integrations include **Amazon Product API** for adding real gifts directly to wish lists ^^.
+Giftly integrates with **[Fake Store API](https://fakestoreapi.com/)** to fetch real-time product data.  
+Future integrations include **Amazon Product API** for adding real gifts directly to wish lists.
 
 ---
 
