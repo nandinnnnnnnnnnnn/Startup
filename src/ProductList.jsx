@@ -3,25 +3,30 @@ import React, { useState, useEffect } from "react";
 function ProductList() {
     const [products, setProducts] = useState([]);
     const [wishlist, setWishlist] = useState([]);
-
+    
     useEffect(() => {
-        fetch("https://fakestoreapi.com/products") // Fetching products from API
+        fetch("https://fakestoreapi.com/products") // ✅ 3rd-party API: Fake Store API
             .then((res) => res.json())
-            .then((data) => setProducts(data));
-
-        const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-        setWishlist(savedWishlist);
+            .then((data) => setProducts(data))
+            .catch((error) => console.error("Error fetching products:", error));
     }, []);
+    
 
     useEffect(() => {
         localStorage.setItem("wishlist", JSON.stringify(wishlist));
     }, [wishlist]);
 
     const addToWishlist = (product) => {
-        if (!wishlist.some((item) => item.id === product.id)) {
-            setWishlist([...wishlist, product]);
+        if (!user) {
+            alert("You must be logged in to add items to your wishlist!");
+            return;
         }
+    
+        const updatedWishlist = [...wishlist, product];
+        setWishlist(updatedWishlist);
+        localStorage.setItem(`wishlist_${user}`, JSON.stringify(updatedWishlist));
     };
+    
 
     const removeFromWishlist = (productId) => {
         setWishlist(wishlist.filter((item) => item.id !== productId));
