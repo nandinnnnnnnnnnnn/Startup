@@ -10,3 +10,14 @@ const client = new MongoClient(url);
 const db = client.db('giftly');
 const usersCollection = db.collection('users');
 const wishlistCollection = db.collection('wishlists');
+
+
+(async function testConnection() {
+    try {
+      await db.command({ ping: 1 });
+      console.log(`Connected to MongoDB at ${config.hostname}`);
+    } catch (ex) {
+      console.error(`Failed to connect to MongoDB: ${ex.message}`);
+      process.exit(1);
+    }
+  })();
