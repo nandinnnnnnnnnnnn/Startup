@@ -18,3 +18,14 @@ app.use(express.static('public'));
 // API router
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
+
+//register
+apiRouter.post('/auth/create', async (req, res) => {
+  if (await findUser('email', req.body.email)) {
+    res.status(409).send({ msg: 'User already exists' });
+  } else {
+    const user = await createUser(req.body.email, req.body.password);
+    setAuthCookie(res, user.token);
+    res.send({ email: user.email });
+  }
+});
