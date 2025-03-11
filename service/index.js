@@ -29,3 +29,17 @@ apiRouter.post('/auth/create', async (req, res) => {
     res.send({ email: user.email });
   }
 });
+
+// Login
+apiRouter.post('/auth/login', async (req, res) => {
+  const user = await findUser('email', req.body.email);
+  if (user && await bcrypt.compare(req.body.password, user.password)) {
+    user.token = uuid.v4();
+    setAuthCookie(res, user.token);
+    res.send({ email: user.email });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+
