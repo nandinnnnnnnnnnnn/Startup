@@ -49,3 +49,24 @@ apiRouter.delete('/auth/logout', async (req, res) => {
   res.clearCookie(authCookieName);
   res.status(204).end();
 });
+
+// to verify user
+const verifyAuth = async (req, res, next) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) next();
+  else res.status(401).send({ msg: 'Unauthorized' });
+};
+
+// Get user's wishlist
+apiRouter.get('/wishlist', verifyAuth, (req, res) => {
+  const userWishlist = wishlists.filter(w => w.email === req.cookies[authCookieName]);
+  res.send(userWishlist);
+});
+
+// add item to wishlist
+apiRouter.post('/wishlist', verifyAuth, (req, res) => {
+  const item = req.body;
+  item.email = req.cookies[authCookieName];
+  wishlists.push(item);
+  res.send({ msg: 'Added to wishlist', wishlist: item });
+});
