@@ -70,3 +70,28 @@ apiRouter.post('/wishlist', verifyAuth, (req, res) => {
   wishlists.push(item);
   res.send({ msg: 'Added to wishlist', wishlist: item });
 });
+
+// heper functions
+async function createUser(email, password) {
+  const passwordHash = await bcrypt.hash(password, 10);
+  const user = { email, password: passwordHash, token: uuid.v4() };
+  users.push(user);
+  return user;
+}
+
+async function findUser(field, value) {
+  return users.find(u => u[field] === value);
+}
+
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
+// --- Start server ---
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
