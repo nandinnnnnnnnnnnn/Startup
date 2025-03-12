@@ -58,17 +58,22 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // Get user's wishlist
-apiRouter.get('/wishlist', verifyAuth, (req, res) => {
-  const userWishlist = wishlists.filter(w => w.email === req.cookies[authCookieName]);
-  res.send(userWishlist);
+apiRouter.get('/wishlist', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    // user.wishlist is an array stored in user
+    res.json(user.wishlist || []);
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
 });
 
 // add item to wishlist
-apiRouter.post('/wishlist', verifyAuth, (req, res) => {
-  const item = req.body;
-  item.email = req.cookies[authCookieName];
-  wishlists.push(item);
-  res.send({ msg: 'Added to wishlist', wishlist: item });
+apiRouter.post('/wishlist', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (!user.wishlist) user.wishlist = []; // Initialize if not exist
+  user.wishlist.push(req.body); // Add item
+  res.send({ msg: 'Added to wishlist', wishlist: user.wishlist });
 });
 
 // heper functions
@@ -84,7 +89,7 @@ async function findUser(field, value) {
 }
 
 function setAuthCookie(res, authToken) {
-  res.cookie(authCookieName, authToken, {
+  res.cookie(authCookieName, authToken, {  
     secure: true,
     httpOnly: true,
     sameSite: 'strict',
