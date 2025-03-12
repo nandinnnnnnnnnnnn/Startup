@@ -76,6 +76,16 @@ apiRouter.post('/wishlist', verifyAuth, async (req, res) => {
   res.send({ msg: 'Added to wishlist', wishlist: user.wishlist });
 });
 
+// remove item from wishlist
+apiRouter.delete('/wishlist/:productId', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (!user.wishlist) user.wishlist = [];
+  user.wishlist = user.wishlist.filter(item => item.productId !== req.params.productId);
+
+  res.send(user.wishlist); // eturn updated wishlist
+});
+
+
 // heper functions
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
@@ -95,6 +105,7 @@ function setAuthCookie(res, authToken) {
     sameSite: 'strict',
   });
 }
+
 
 // --- Start server ---
 app.listen(port, () => {
