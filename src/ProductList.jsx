@@ -1,90 +1,107 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from "react";
 
-function ProductList({ user, wishlist, setWishlist }) {
-  const [products, setProducts] = useState([]);
+function ProductList({user}) { 
+    const [products, setProducts] = useState([]);
+    const [wishlist, setWishlist] = useState([]);
 
-  //Fetch products from FakeStore API
-  useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error('Error fetching products:', error));
-  }, []);
+    useEffect(() => {
+        fetch("https://fakestoreapi.com/products") // Temporary API for Phase 2
+            .then((res) => res.json())
+            .then((data) => setProducts(data))
+            .catch((error) => console.error("Error fetching products:", error));
+    }, []);
 
-  //If user changes (login/logout), fetch or clear the wishlist from backend
-  useEffect(() => {
-    if (user) {
-      fetch('/api/wishlist', { credentials: 'include' })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log("Fetched wishlist from backend:", data);
-          if (Array.isArray(data)) setWishlist(data);
-        });
-    }
-  }, [user, setWishlist]);
+    useEffect(() => {
+        if (user) {
+            const savedWishlist = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || [];
+            setWishlist(savedWishlist);
+        }
+    }, [user]); //load wishlist for user
+    
+    useEffect(() => {
+        if(user){
+            localStorage.setItem('wishlist_${user}', JSON.stringify(wishlist));
+        }}, [wishlist, user]); //store wishlist for user
 
-  //Add item to wishlist (in-memory backend)
-  const handleAddToWishlist = (product) => {
-    if (!user) return;
 
-    fetch('/api/wishlist', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify(product),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('Wishlist updated:', data);
-        if (Array.isArray(data)) setWishlist(data); 
-      });
-  };
+      
+    useEffect(() => {
+        localStorage.setItem(`wishlist_${user || "guest"}`, JSON.stringify(wishlist));
+    }, [wishlist, user]); //store wishlist for user or guest
+/* 
+    useEffect(() => {
+        if (user) {
+            const savedWishlist = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || [];
+            setWishlist(savedWishlist);
+        }
+    }, [user]);
+    */
+    const addToWishlist = (product) => {
+        if (!user) {
+            alert("You must be logged in to add items to your wishlist!");
+            return;
+        }
 
-  //Remove item from wishlist
-  const removeFromWishlist = (productId) => {
-    fetch(`/api/wishlist/${productId}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-    })
-      .then((response) => response.json())
-      .then((updatedWishlist) => {
-        console.log("Updated wishlist after remove:", updatedWishlist);
+        if (wishlist.some((item) => item.id === product.id)) {
+            alert("This item is already in your wishlist!");
+            return;
+        }
+    
+        const updatedWishlist = [...wishlist, product];
         setWishlist(updatedWishlist);
-      })
-      .catch((error) => console.error('Error removing from wishlist:', error));
-  };
+    };
+    
 
-  //Check if product is in wishlist
-  const isInWishlist = (productId) => wishlist.some((item) => item.productId === productId);
+    const removeFromWishlist = (productId) => {
 
-  return (
-    <div className="product-container">
-      {products.map((product) => (
-        <div className="product-card" key={product.id}>
-          <img src={product.image} alt={product.title} />
-          <h5 className="product-title">{product.title}</h5>
-          <p className="category">{product.category}</p>
-          <p className="price">${product.price}</p>
-          <div className="button-container">
-            {user ? (
-              isInWishlist(product.id) ? (
-                <button className="btn-remove" onClick={() => removeFromWishlist(product.id)}>
-                 Remove from Wishlist
-                 </button>
-              ) : (
-                <button className="btn-add" onClick={() => handleAddToWishlist(product)}>
-                  🛍️ Add to Wishlist
-                </button>
-              )
-            ) : (
-              <p style={{ color: '#880e4f', fontFamily: 'Pixelify Sans' }}>Login to add</p>
-            )}
-          </div>
+        const updatedWishlist = wishlist.filter((item) => item.id !== productId);
+        setWishlist(updatedWishlist);
+        };
+
+    return (
+        <div className="container">
+            <h2 className="wishlist_text">🛍️ Shop Our Gifts 🛍️</h2>
+            <div className="product-container">
+                {products.map((product) => (
+                    <div className="product-card" key={product.id}>
+                        <img src={product.image} alt={product.title} />
+                        <h5>{product.title}</h5>
+                        <p>${product.price}</p>
+                        <div className="button-container">
+                            {wishlist.some((item) => item.id === product.id) ? (
+                                <button onClick={() => removeFromWishlist(product.id)} className="btn-remove">
+                                    ❌ Remove from Wishlist
+                                </button>
+                            ) : (
+                                <button onClick={() => addToWishlist(product)} className="btn-add">
+                                    💖 Add 💖
+                                </button>
+                            )}
+                        </div>
+
+                    </div>
+                ))}
+            </div>
+
+
+            <h3 className="wishlist_text">🎁 Your Wishlist</h3>
+                <ul>
+                    {wishlist.length > 0 ? (
+                        wishlist.map((item) => (
+                            <li key={item.id} className="wishlist-item">
+                                {item.title} - ${item.price}
+                                <button onClick={() => removeFromWishlist(item.id)} className="wishlist-remove">
+                                    ❌ Remove
+                                </button>
+                            </li>
+                        ))
+                    ) : (
+                        <p>Your wishlist is empty</p>
+                    )}
+                </ul>
         </div>
-      ))}
-    </div>
-  );
+    );
 }
 
 export default ProductList;
+

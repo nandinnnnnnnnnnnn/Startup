@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import bcrypt from "bcryptjs";  // bcrypt for password encryption yay
 
 function Signup({ onSignup }) {
     const [username, setUsername] = useState("");
@@ -15,20 +16,25 @@ function Signup({ onSignup }) {
             return;
         }
 
-        const response = await fetch('/api/auth/signup', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include', // to include cookies for session
-            body: JSON.stringify({ username, password }),
-        });
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const userExists = users.find(user => user.username === username);
 
-        if (response.ok) {
-            const data = await response.json();
-            onSignup(data.username); // app login
-            navigate("/");
-        } else {
-            setError("Username already taken");
+        if (userExists) {
+            setError("Username already taken! Try another one.");
+            return;
         }
+
+        // 🔐 Encrypt the password before saving
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        // Save new user
+        const newUser = { username, password: hashedPassword };
+        users.push(newUser);
+        localStorage.setItem("users", JSON.stringify(users));
+
+        onSignup(username);
+        navigate("/");
     };
 
     return (
@@ -62,3 +68,4 @@ function Signup({ onSignup }) {
 }
 
 export default Signup;
+

@@ -1,17 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import giftPic from "/images/gift_pic.jpg"; // Ensure the image path is correct
+import React from "react";
+import giftPic from "/images/gift_pic.jpg";
 
 function About() {
-    const [quote, setQuote] = useState('');
-
-    useEffect(() => {
-      fetch('https://api.quotable.io/random')
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data.content);
-          setQuote(data.content);
-        });
-    }, []);
     return (
         <div className="content about-section">
             <div className="container">
@@ -35,3 +25,4 @@ function About() {
 }
 
 export default About;
+
