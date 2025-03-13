@@ -10,10 +10,22 @@ function Login({ onLogin }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-        const user = users.find(user => user.username === username);
-
+        const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include', // Set cookie for session
+            body: JSON.stringify({ username, password }),
+        });
+    
+        if (response.ok) {
+            const data = await response.json();
+            onLogin(data.username); // App state login
+            navigate("/");
+        } else {
+            setError("Invalid credentials");
+        }
+    };
+      
         if (!user) {
             setError("User not found!");
             return;
