@@ -14,6 +14,43 @@ app.use(express.static('public'));
 let users = [];
 let wishlists = {}; // { token: [wishlistItems] }
 
+let apiRouter = express.Router();
+app.use(`/api`, apiRouter);
+
+// Create Signup
+apiRouter.post('/auth/create', async (req, res) => {
+    if (await findUser('username', req.body.username)) {
+      res.status(409).send({ msg: 'Existing user' });
+    } else {
+      const user = await createUser(req.body.username, req.body.password);
+      setAuthCookie(res, user.token);
+      res.send({ username: user.username });
+    }
+  });
+
+  // Login
+apiRouter.post('/auth/login', async (req, res) => {
+    const user = await findUser('username', req.body.username);
+    if (user && await bcrypt.compare(req.body.password, user.password)) {
+      user.token = uuid.v4();
+      setAuthCookie(res, user.token);
+      res.send({ username: user.username });
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  });
+  
+  // Logout
+  apiRouter.delete('/auth/logout', async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (user) {
+      delete user.token;
+    }
+    res.clearCookie(authCookieName);
+    res.status(204).end();
+  });
+  
+
 // Heper functions
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
@@ -26,9 +63,9 @@ async function findUser(field, value) {
     return users.find((u) => u[field] === value);
 }
 
-function setAuthCookie(res, token) {
-    res.cookie(authCookieName, token, {
-        secure: false, // Change to true in production (HTTPS)
+function setAuthCookie(res, authToken) {
+    res.cookie(authCookieName, authToken, {
+        secure: false, 
         httpOnly: true,
         sameSite: 'strict',
     });
@@ -44,8 +81,8 @@ const verifyAuth = async (req, res, next) => {
         res.status(401).send({ msg: 'Unauthorized' });
     }
 };
-
-// Endpoints
+/*
+// Endpoints 
 app.post('/api/auth/create', async (req, res) => {
     if (await findUser('username', req.body.username)) {
         res.status(409).send({ msg: 'Existing user' });
@@ -73,7 +110,7 @@ app.delete('/api/auth/logout', (req, res) => {
     res.clearCookie(authCookieName);
     res.status(204).end();
 });
-
+*/
 // Wishlist
 app.get('/api/wishlist', verifyAuth, (req, res) => {
     const token = req.cookies[authCookieName];
