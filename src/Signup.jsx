@@ -8,23 +8,25 @@ function Signup({ onSignup }) {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
-
-        if (username.trim() === "" || password.trim() === "") {
-            setError("Username and password cannot be empty!");
-            return;
+        const response = await fetch('/api/auth/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ username, password }),
+        });
+        if (response.ok) {
+            const data = await response.json();
+            onLogin(data.username);
+            navigate('/'); // Redirect to home
+        } else {
+            const err = await response.json();
+            setError(err.msg || "Failed to sign up.");
         }
+    };
 
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-        const userExists = users.find(user => user.username === username);
-
-        if (userExists) {
-            setError("Username already taken! Try another one.");
-            return;
-        }
-
-        // 🔐 Encrypt the password before saving
+     /*   //Encrypt the password before saving
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -36,7 +38,7 @@ function Signup({ onSignup }) {
         onSignup(username);
         navigate("/");
     };
-
+    */
     return (
         <div className="login-container">
             <div className="login-box">

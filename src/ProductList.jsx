@@ -5,26 +5,28 @@ function ProductList({user}) {
     const [wishlist, setWishlist] = useState([]);
 
     useEffect(() => {
-        fetch("https://fakestoreapi.com/products") // Temporary API for Phase 2
+        fetch("https://fakestoreapi.com/products") 
             .then((res) => res.json())
             .then((data) => setProducts(data))
             .catch((error) => console.error("Error fetching products:", error));
     }, []);
-
+    // fetch products from API
     useEffect(() => {
         if (user) {
-            const savedWishlist = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || [];
-            setWishlist(savedWishlist);
+          fetch('/api/wishlist', { credentials: 'include' })
+            .then(res => res.json())
+            .then(data => setWishlist(data))
+            .catch(() => setWishlist([])); // Empty if unauthorized
         }
-    }, [user]); //load wishlist for user
+      }, [user]);
     
-    useEffect(() => {
-        if(user){
-            localStorage.setItem('wishlist_${user}', JSON.stringify(wishlist));
-        }}, [wishlist, user]); //store wishlist for user
+     useEffect(() => {
+        if (user) {
+          localStorage.setItem(`wishlist_${user}`, JSON.stringify(wishlist));
+        }
+      }, [wishlist, user]);
 
-
-      
+      /*
     useEffect(() => {
         localStorage.setItem(`wishlist_${user || "guest"}`, JSON.stringify(wishlist));
     }, [wishlist, user]); //store wishlist for user or guest
@@ -36,27 +38,39 @@ function ProductList({user}) {
         }
     }, [user]);
     */
-    const addToWishlist = (product) => {
+    const addToWishlist = async (product) => {
         if (!user) {
-            alert("You must be logged in to add items to your wishlist!");
-            return;
+          alert("You must be logged in to add items to your wishlist!");
+          return;
         }
-
+    
         if (wishlist.some((item) => item.id === product.id)) {
-            alert("This item is already in your wishlist!");
-            return;
+          alert("This item is already in your wishlist!");
+          return;
         }
-    
-        const updatedWishlist = [...wishlist, product];
-        setWishlist(updatedWishlist);
-    };
-    
 
-    const removeFromWishlist = (productId) => {
-
-        const updatedWishlist = wishlist.filter((item) => item.id !== productId);
-        setWishlist(updatedWishlist);
+        const response = await fetch('/api/wishlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include', // Important for cookies
+            body: JSON.stringify(product)
+          });
+      
+          if (response.ok) {
+            const updatedWishlist = await response.json();
+            setWishlist(updatedWishlist); 
+          } else {
+            alert('Failed to add to wishlist. Please try again.');
+          }
         };
+      
+        // Remove from wishlist (frontend only for now)
+        const removeFromWishlist = (productId) => {
+          const updatedWishlist = wishlist.filter((item) => item.id !== productId);
+          setWishlist(updatedWishlist);
+
+        };
+      
 
     return (
         <div className="container">
