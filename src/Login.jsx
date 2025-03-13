@@ -8,27 +8,23 @@ function Login({ onLogin }) {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    async function handleLogin(e) {
         e.preventDefault();
+        const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
 
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-        const user = users.find(user => user.username === username);
-
-        if (!user) {
-            setError("User not found!");
-            return;
+        if (response.ok) {
+            const data = await response.json();
+            props.onLogin(data.username); 
+            navigate('/'); 
+        } else {
+            setError("Invalid credentials! Please try again.");
         }
+    }
 
-        //Compare password with the stored encrypted password
-        const validPassword = await bcrypt.compare(password, user.password);
-        if (!validPassword) {
-            setError("Incorrect password!");
-            return;
-        }
-
-        onLogin(username);
-        navigate("/");
-    };
 
     return (
         <div className="login-container">
