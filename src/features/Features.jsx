@@ -4,16 +4,23 @@ function Features({user}) {
     const [wishlist, setWishlist] = useState([]);
 
     useEffect(() => {
-        if (user){
-        const savedWishlist = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || [];
-        setWishlist(savedWishlist);
+        if (user) {
+            fetch('/api/wishlist', { credentials: 'include' })
+                .then(res => res.json())
+                .then(data => setWishlist(data))
+                .catch(() => setWishlist([]));
         }
     }, [user]);
 
-    const removeFromWishlist = (productId) => {
-        const updatedWishlist = wishlist.filter((item) => item.id !== productId);
-        setWishlist(updatedWishlist);
-        localStorage.setItem(`wishlist_${user}`, JSON.stringify(updatedWishlist));    
+    const removeFromWishlist = async (productId) => {
+        const response = await fetch(`/api/wishlist/${productId}`, {
+            method: 'DELETE',
+            credentials: 'include',
+        });
+        if (response.ok) {
+            const updatedWishlist = await response.json();
+            setWishlist(updatedWishlist);
+        }
     };
 
     return (

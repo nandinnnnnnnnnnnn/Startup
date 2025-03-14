@@ -1,30 +1,39 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import bcrypt from "bcryptjs";  // bcrypt for password encryption yay
 
 function Signup({ onSignup }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
-
+    
     const handleSignup = async (e) => {
         e.preventDefault();
-        const response = await fetch('/api/auth/create', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ username, password }),
-        });
-        if (response.ok) {
-            const data = await response.json();
-            onLogin(data.username);
-            navigate('/'); // Redirect to home
-        } else {
-            const err = await response.json();
-            setError(err.msg || "Failed to sign up.");
+        setError(""); // Clear previous errors
+
+        try {
+            const response = await fetch("/api/auth/create", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include", 
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Signup success:", data);
+                onSignup(data.username); // Pass username to App.jsx
+                navigate("/login"); // Redirect to login page
+            } else {
+                const body = await response.json();
+                setError(`Error: ${body.msg}`);
+            }
+        } catch (err) {
+            console.error("Signup error:", err);
+            setError("Error: Network error");
         }
     };
+
 
      /*   //Encrypt the password before saving
         const salt = await bcrypt.genSalt(10);
@@ -44,7 +53,7 @@ function Signup({ onSignup }) {
             <div className="login-box">
                 <h2>Create Your Account 🎁</h2>
                 {error && <p className="error-msg">{error}</p>}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSignup}>
                     <input
                         type="text"
                         placeholder="Enter your username"

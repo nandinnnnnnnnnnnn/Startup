@@ -28,7 +28,7 @@ function Home({ user }) {
             }
         }, 100);
     }, []);
-
+    
     return (
         <div className="content">
             <div id="carouselExampleRide" className="carousel slide" data-bs-ride="carousel">
@@ -56,7 +56,8 @@ function Home({ user }) {
             </div>
 
             <h2 className="welcome_msg">Welcome to JustGiftly</h2>
-            <ProductList />
+            <ProductList user={user} /> 
+
         </div>
     );
 }
@@ -110,27 +111,7 @@ function App() {
     const [user, setUser] = useState(null);
     const [notifications, setNotifications] = useState([]);
 
-    useEffect(() => {
-        const savedUser = localStorage.getItem("user");
-        if (savedUser) {
-            setUser(savedUser);
-        }
-
-        // Temporary WebSocket Placeholder, simulates 5 seconds
-        const temporaryWebSocket = setInterval(() => {
-            const fakeMessage = {
-                user: "System",
-                text: "🎁 Someone just added a new gift to their wishlist!",
-            };
-            setNotifications((prev) => [...prev, fakeMessage]);
-            setTimeout(() => {
-                setNotifications((prev) => prev.slice(1));
-            }, 20000);
-        }, 5000);
-
-        return () => clearInterval(temporaryWebSocket); // Cleanup 
-    }, []);
-
+   
     const handleLogin = (username) => {
         setUser(username);
         localStorage.setItem("user", username);
@@ -158,12 +139,12 @@ function App() {
                 </div>
 
               <Routes>
+                  <Route path="/" element={<Home user={user} />} /> 
                   <Route path="/about" element={<About />} />
                   <Route path="/features" element={<Features user={user} />} />
                   <Route path="/login" element={<Login onLogin={handleLogin} />} />
                   <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
-                  <Route path="/" element={<ProductList user={user} />} /> 
               </Routes>
               <Footer />
           </div>

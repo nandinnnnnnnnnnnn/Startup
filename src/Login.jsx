@@ -7,26 +7,32 @@ function Login({ onLogin }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(""); // Clear previous error
+    try {
+        const response = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ username, password }),
+        });
 
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', // Important for cookies/sessions
-      body: JSON.stringify({ username, password }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      onLogin(data.username);
-      navigate('/'); // Redirect to home after login
-    } else {
-      const err = await response.json();
-      setError(err.msg || "Invalid credentials");
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Login success:", data);
+            onLogin(data.username); // Update user in App.jsx
+            navigate("/");
+        } else {
+            const body = await response.json();
+            setError(`Error: ${body.msg}`);
+        }
+    } catch (err) {
+        console.error("Login error:", err);
+        setError("Error: Network error");
     }
-  };
-
+};
   return (
     <div className="login-container">
       <div className="login-box">
