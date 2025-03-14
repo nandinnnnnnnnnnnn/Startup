@@ -111,27 +111,36 @@ app.delete('/api/auth/logout', (req, res) => {
     res.status(204).end();
 });
 */
-// Wishlist
-app.get('/api/wishlist', verifyAuth, (req, res) => {
+
+//Get wishlist
+apiRouter.get('/wishlist', verifyAuth, (req, res) => {
     const token = req.cookies[authCookieName];
     res.send(wishlists[token] || []);
 });
 
-app.post('/api/wishlist', verifyAuth, (req, res) => {
+//Add to wishlist 
+apiRouter.post('/wishlist', verifyAuth, (req, res) => {
     const token = req.cookies[authCookieName];
     wishlists[token] = wishlists[token] || [];
-    wishlists[token].push(req.body); // Add item
+    const product = req.body;
+
+    //Check if product already in wishlist
+    if (!wishlists[token].some(item => item.id === product.id)) {
+        wishlists[token].push(product); //Add if not duplicate!!!!
+    }
+
     res.send(wishlists[token]);
 });
 
-app.delete('/api/wishlist', verifyAuth, (req, res) => {
+//Remove item from wishlist
+apiRouter.delete('/wishlist/:id', verifyAuth, (req, res) => {
     const token = req.cookies[authCookieName];
-    wishlists[token] = wishlists[token] || [];
-    wishlists[token] = wishlists[token].filter(item => item.id !== req.body.id); // Remove item
+    const productId = parseInt(req.params.id);
+    wishlists[token] = (wishlists[token] || []).filter(item => item.id !== productId);
     res.send(wishlists[token]);
 });
 
-// Error handler
+
 app.use((err, req, res, next) => {
     res.status(500).send({ type: err.name, message: err.message });
 });
