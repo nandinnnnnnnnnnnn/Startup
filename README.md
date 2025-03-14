@@ -4,17 +4,6 @@
 
 ---
 
-## **📌 Deliverables**
-For this deliverable, I completed the following:  
-✅ **Built the application using React & Vite.**  
-✅ **Better wishlist functionality with local storage.**  
-✅ **Created a dedicated Wishlist page to manage saved gifts.**  
-✅ **Encrypted user passwords with `bcryptjs` for security ^^.**  
-✅ **Implemented "Forgot Password" feature for password reset.**  
-✅ **Simon React deployed to production environment.**  
-
----
-
 ## **🚀 Elevator Pitch**
 🎁 **Tired of guessing what gifts your loved ones want?**  
 With **Giftly**, you can **create, manage, and share wish lists** effortlessly. Whether for birthdays, holidays, or special occasions, Giftly takes the stress out of gift-giving.
@@ -34,41 +23,13 @@ With **Giftly**, you can **create, manage, and share wish lists** effortlessly. 
 ---
 
 ## **✨ Key Features**
-- **API-Driven Product Listing** – Fetches live products using a third-party API (currently not from Amazon yet ^^).  
-- **Wish List Management** – Add, edit, and delete wish list items (Future it will saved on the users account uniquely).  
+- **Wish List Management** – Add, edit, and delete wish list items.  
 - **User Authentication** – Sign up and log in securely with encrypted passwords.  
 - **Forgot Password Feature** – Reset passwords.  
 - **Wishlist Page** – Users can now view and manage their wishlists in a wishlist page.  
-- **Persistent Storage** – User data and wishlist items are stored even after logout.  
-- **Database Storage (Planned)** – Store wish lists for easy access.  
+- **Database Storage (Planned)**. 
 
 ---
-
-## **🎀 CSS Enhancements**
-✅ **Soft Pink Theme** – Aesthetic gradient background & deep pink accents.  
-✅ **Stylish Navbar & Footer** – Sticky navigation & a polished footer design.  
-✅ **Interactive Product Cards** – Transparent design, hover effects & shadows.  
-✅ **Custom Buttons** – Rounded, animated buttons with smooth transitions.  
-✅ **Responsive** – Optimized for mobile & desktop devices.  
-
----
-
-## 📌 **React Phase 2: API & Wishlist Enhancements**  
-
-For this deliverable, I implemented:  
-✅ **API Integration** – Products are now loaded from an external API instead of hardcoded data.  
-✅ **Wishlist Page** – A page for users to manage their saved gifts.  
-✅ **Persistent Wishlist Storage** – Wishlist items are stored in `localStorage` so they remain after logout.  
-✅ **Improved Authentication** –  
-  - **Sign Up with Encrypted Passwords** (`bcryptjs`).  
-  - **Login Verification** – Passwords are securely checked.  
-  - **Forgot Password Feature** – Users can reset their passwords without an email.  
-✅ **Bug Fixes & UI Improvements** –  
-  - Improved responsiveness of product grids.  
-  - Consistent button styles across the site.  
-
----
-
 ## **🛠️ Technologies Used**
 | Technology | Purpose |
 |------------|---------|
@@ -82,18 +43,73 @@ For this deliverable, I implemented:
 | **Database & WebSockets (Planned)** | Real-time wish list updates & data storage from Amazon ^^. |  
 
 ---
+## **HTML deliverable**
+✅ **HTML pages - Three HTML page that represent the Main, About, and Wishlists page.
+✅ **Links, Text, Images, 
+✅ **DB/Login placaholder
+✅ **Websocket for real-time notification when adding list
 
-## **🔗 Third-Party API Integration**
+---
+
+## **🎀 CSS Delivarable**
+✅ **Soft Pink Theme** – Aesthetic gradient background & deep pink accents.  
+✅ **Stylish Navbar & Footer** – Sticky navigation & a polished footer design.  
+✅ **Interactive Product Cards** – Transparent design, hover effects & shadows.  
+✅ **Custom Buttons** – Rounded, animated buttons with smooth transitions.  
+✅ **Responsive** – Optimized for mobile & desktop devices.  
+
+---
+
+## 📌 **React Phase 2**  
+
+For this deliverable, I implemented:  
+✅ **API Integration – Products are now loaded from an external API instead of hardcoded data.  
+✅ **Wishlist Page – A page for users to manage their saved gifts.  
+✅ **Persistent Wishlist Storage – Wishlist items are stored in `localStorage` so they remain after logout.  
+✅ **Improved Authentication –  
+  - **Sign Up with Encrypted Passwords (`bcryptjs`).  
+  - **Login Verification – Passwords are securely checked.  
+  - **Forgot Password Feature – Users can reset their passwords without an email.  
+✅ **Bug Fixes & UI Improvements –  
+  - Improved responsiveness of product grids.  
+  - Consistent button styles across the site.  
+
+---
+## 📌 **Service Delivarable **  
+For this delibarable I added backend integrationts.
+✅ **Node.js/Express.js** server running on port 3000 for backend API.
+✅ **Frontend** served up using Express static middleware. 
+    - app.use(express.static('public'));
+
+✅ **Third party service endpoints** by callin calling https://fakestoreapi.com/products in ProductList.jsx to fetch products.
+✅ **Backend provides service endpoints** by -/api/auth/create (signup)
+    - /api/auth/login (login)
+    - /api/auth/logout (logout)
+    - /api/wishlist (GET and POST for wishlist)
+    - /api/wishlist/:id (DELETE for wishlist items)
+    These endpoints handle CRUD and auth operations.
+✅ **Frontend calls service endpoints**
+    - Login.jsx calls /api/auth/login.
+    - Signup.jsx calls /api/auth/create.
+    - ProductList.jsx calls /api/wishlist for GET, POST, and DELETE operations.
+✅ **Supports registration, login, logout, and restricted endpoint**
+    - Signup.jsx allows creating an account and redirects to login.
+    - Login.jsx allows logging in and redirects to home.
+    - Logout button works and removes session.
+    - Wishlist (/api/wishlist) is a restricted endpoints shows "Unauthorized" if not logged in.
+
+---
+## **📌 Third-Party API Integration**
 Giftly integrates with **[Fake Store API](https://fakestoreapi.com/)** to fetch real-time product data.  
 Future integrations include **Amazon Product API** for adding real gifts directly to wish lists.
 
 ---
+## **📌  WebSocket (Temporary)
 
-## **WebSocket**
-I added WebSocket functionality to show real-time notifications when a user adds an item to their wishlist. This helps users see updates instantly without needing to refresh the page. A temporary WebSocket server is used for now, and it sends messages every time a wishlist is updated.
+Currently, Giftly uses a **simulated WebSocket feature** using timed notifications to mimic real-time updates when a user adds an item to their wishlist. This prepares for future WebSocket integration for real-time gift updates and collaborative wishlists.
 
-
----
+Planned future update:Real WebSocket server with live user interaction.
+-- 
 
 ## **📎 Links & Resources**
 🔗 **GitHub Repository:** [Giftly Repository](https://github.com/nandinnnnnnnnnnnn/Startup)  

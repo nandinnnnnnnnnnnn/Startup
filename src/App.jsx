@@ -130,13 +130,6 @@ function App() {
       <Router>
            <div className="page-wrapper">
                 <Navbar user={user} onLogout={handleLogout} />
-                <div className="notifications">
-                    {notifications.map((notif, index) => (
-                        <p key={index} className="notification-item">
-                            {notif.user}: {notif.text}
-                        </p>
-                    ))}
-                </div>
 
               <Routes>
                   <Route path="/" element={<Home user={user} />} /> 

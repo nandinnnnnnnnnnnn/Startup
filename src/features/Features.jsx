@@ -25,7 +25,7 @@ function Features({user}) {
 
     return (
         <div className="content container my-5">
-            <h2 className="text-center section-heading">🎁 Your Wishlist</h2>
+            <h2 className="text-center section-heading section-title">🎁 Your Wishlist 🎁</h2>
 
             {wishlist.length === 0 ? (
                 <p className="text-center">Your wishlist is empty 😢</p>

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 function ProductList({user}) { 
     const [products, setProducts] = useState([]);
     const [wishlist, setWishlist] = useState([]);
+    const [alertMessage, setAlertMessage] = useState(null);
+    const [alertType, setAlertType] = useState(null);
 
     useEffect(() => {
         fetch("https://fakestoreapi.com/products") 
@@ -39,9 +41,19 @@ function ProductList({user}) {
         }
     }, [user]);
     */
+   //ALERT FOR LOGIN 
+   const showAlert = (message, type='info') => {
+        setAlertMessage(message);
+        setAlertType(type);
+        setTimeout(() => {
+            setAlertMessage(null);
+        // setAlertType(null);
+            }, 3000);
+    };
+
     const addToWishlist = async (product) => {
         if (!user) {
-          alert("You must be logged in to add items to your wishlist!");
+            showAlert("You must be logged in to add items to your wishlist!");
           return;
         }
     
@@ -60,15 +72,16 @@ function ProductList({user}) {
           if (response.ok) {
             const updatedWishlist = await response.json();
             setWishlist(updatedWishlist); 
+            showAlert("😊Item added to wishlist😊!", "success");
           } else {
-            alert('Failed to add to wishlist. Please try again.');
+            showAlert('Failed to add to wishlist. Please try again.');
           }
         };
       
     // Remove from wishlist backend + frontend
     const removeFromWishlist = async (productId) => {
         if (!user) {
-            alert("You must be logged in to remove items from your wishlist!");
+            showAlert("🤖You must be logged in to remove items from your wishlist🤖!");
             return;
         }
 
@@ -80,14 +93,21 @@ function ProductList({user}) {
         if (response.ok) {
             const updatedWishlist = await response.json();
             setWishlist(updatedWishlist); //update wishlist from backend
+            showAlert("😔Item removed from wishlist😔!", "success");
+
         } else {
-            alert('Failed to remove from wishlist. Please try again.');
+            showAlert('Failed to remove from wishlist. Please try again.');
         }
     };
       
-
+    
     return (
         <div className="container">
+              {alertMessage && (
+                <div className={`custom-alert custom-alert-${alertType}`}>
+                    {alertMessage}
+                </div>
+                )}
             <h2 className="wishlist_text">🛍️ Shop Our Gifts 🛍️</h2>
             <div className="product-container">
                 {products.map((product) => (
@@ -132,4 +152,3 @@ function ProductList({user}) {
 }
 
 export default ProductList;
-

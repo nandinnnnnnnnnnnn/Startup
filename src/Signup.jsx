@@ -23,7 +23,7 @@ function Signup({ onSignup }) {
                 const data = await response.json();
                 console.log("Signup success:", data);
                 onSignup(data.username); // Pass username to App.jsx
-                navigate("/login"); // Redirect to login page
+                navigate("/"); // Redirect to login page
             } else {
                 const body = await response.json();
                 setError(`Error: ${body.msg}`);

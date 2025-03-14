@@ -34,19 +34,25 @@
 
 ---
 
-### **Next Steps**
-**Move Wishlist to Database** – Right now, it’s stored in `localStorage`, but I want to move it to an actual backend later.  
-**Add "Move to Cart" Feature** – Allow users to transfer wishlist items to their cart.  
-**Wishlist Counter in Navbar** – Display the number of wishlist items in the navigation bar.  
-**Advanced Product Filters** – Let users filter products by price, category, or popularity.  
-**Animations & Microinteractions** – Make product cards animate smoothly when hovering or adding to the wishlist.  
-**Button are not aligning same yet - Need to work on my app.css.
-
----
-
 ## **Resources I Used**
 🔗 **Fake Store API** – Used to fetch product data dynamically but it is temporary in the future it supposed to be Amazon lists.  
 🔗 **bcryptjs Documentation** – Helped with encrypting and verifying passwords.  
 
 ---
 
+## ***Update^^: March 13, 2025***
+## ** Service Delovarable:
+## **🔍 Challenges faced**
+**Duplicate signup issue – On this one I didn't what to do and stuck for a while. All my code was not showing logic and I had to restart everything again because I was complete in loophole. Then I git checkout from the old version. Now it fixed handled with proper user existence check in backend.
+**Handling wishlist update conflicts – Solved by syncing frontend and backend properly.
+**Initial blank page for login/signup – Fixed event handler issues and routing.
+**Frontend-backend integration (CORS/cookies) – Fixed via proper credential handling in fetch.
+
+### **📌 Key Things I Learned**
+**Building Express APIs to handle secure endpoints with authentication.
+**Cookie-based Authentication – Handling sessions securely without exposing tokens.
+**Connecting Frontend to Backend using Vite + Express 
+**Securing Passwords using bcryptjs and checking login credentials properly in the backend
+**Combining React with Express Backend smoothly for full-stack app.
+
+💖 Made with love by Nandintsetseg Batsaikhan – "Gift-giving, made simple and magical!" 🎁✨
