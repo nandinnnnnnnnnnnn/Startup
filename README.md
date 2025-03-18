@@ -63,36 +63,44 @@ With **Giftly**, you can **create, manage, and share wish lists** effortlessly. 
 ## 📌 **React Phase 2**  
 
 For this deliverable, I implemented:  
-✅ **API Integration – Products are now loaded from an external API instead of hardcoded data.  
-✅ **Wishlist Page – A page for users to manage their saved gifts.  
-✅ **Persistent Wishlist Storage – Wishlist items are stored in `localStorage` so they remain after logout.  
-✅ **Improved Authentication –  
+✅ **API Integration** – Products are now loaded from an external API instead of hardcoded data.  
+✅ **Wishlist Page** – A page for users to manage their saved gifts.  
+✅ **Persistent Wishlist Storage** – Wishlist items are stored in `localStorage` so they remain after logout.  
+✅ **Improved Authentication** –  
   - **Sign Up with Encrypted Passwords (`bcryptjs`).  
   - **Login Verification – Passwords are securely checked.  
   - **Forgot Password Feature – Users can reset their passwords without an email.  
-✅ **Bug Fixes & UI Improvements –  
+✅ **Bug Fixes & UI Improvements** –  
   - Improved responsiveness of product grids.  
   - Consistent button styles across the site.  
 
 ---
-## 📌 **Service Delivarable **  
-For this delibarable I added backend integrationts.
-✅ **Node.js/Express.js** server running on port 3000 for backend API.
-✅ **Frontend** served up using Express static middleware. 
+## 📌 **Service Delivarable**  
+For this delibarable I added backend integrationts:
+✅ **Node.js/Express.js** 
+    - server running on port 4000 for backend API.
+
+✅ **Frontend** 
+    - served up using Express static middleware. 
     - app.use(express.static('public'));
 
-✅ **Third party service endpoints** by callin calling https://fakestoreapi.com/products in ProductList.jsx to fetch products.
-✅ **Backend provides service endpoints** by -/api/auth/create (signup)
+✅ **Third party service endpoints** 
+    - by callin calling https://fakestoreapi.com/products in ProductList.jsx to fetch products.
+
+✅ **Backend provides service endpoints** 
+    - by /api/auth/create (signup)
     - /api/auth/login (login)
     - /api/auth/logout (logout)
     - /api/wishlist (GET and POST for wishlist)
     - /api/wishlist/:id (DELETE for wishlist items)
     These endpoints handle CRUD and auth operations.
-✅ **Frontend calls service endpoints**
+
+✅ **Frontend calls service endpoints** - 
     - Login.jsx calls /api/auth/login.
     - Signup.jsx calls /api/auth/create.
     - ProductList.jsx calls /api/wishlist for GET, POST, and DELETE operations.
-✅ **Supports registration, login, logout, and restricted endpoint**
+
+✅ **Supports registration, login, logout, and restricted endpoint** - 
     - Signup.jsx allows creating an account and redirects to login.
     - Login.jsx allows logging in and redirects to home.
     - Logout button works and removes session.
