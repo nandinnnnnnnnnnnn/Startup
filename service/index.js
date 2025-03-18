@@ -17,6 +17,11 @@ let wishlists = {}; // { token: [wishlistItems] }
 let apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+// Default API route to server is working
+apiRouter.get('/', (req, res) => {
+    res.json({ message: "API is working"});
+});
+
 // Create Signup
 apiRouter.post('/auth/create', async (req, res) => {
     if (await findUser('username', req.body.username)) {
