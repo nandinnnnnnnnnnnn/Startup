@@ -7,6 +7,7 @@ const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 const authCookieName = 'token';
 
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public')); 
@@ -16,6 +17,14 @@ let wishlists = {}; // { token: [wishlistItems] }
 
 let apiRouter = express.Router();
 app.use(`/api`, apiRouter);
+
+//Database.js
+const { connect, usersCollection, wishlistsCollection } = require('./database');
+
+(async () => {
+  await connect();
+})();
+
 
 // Default API route to server is working
 apiRouter.get('/', (req, res) => {
@@ -59,14 +68,18 @@ apiRouter.post('/auth/login', async (req, res) => {
 // Heper functions
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
-    const user = { username, password: passwordHash, token: uuid.v4() };
-    users.push(user);
+    const token = uuid.v4();
+    const user = { username, password: passwordHash, token };
+    await usersCollection().insertOne(user);
     return user;
-}
-
-async function findUser(field, value) {
-    return users.find((u) => u[field] === value);
-}
+  }
+  
+  async function findUser(field, value) {
+    const query = {};
+    query[field] = value;
+    return await usersCollection().findOne(query);
+  }
+  
 
 function setAuthCookie(res, authToken) {
     res.cookie(authCookieName, authToken, {
