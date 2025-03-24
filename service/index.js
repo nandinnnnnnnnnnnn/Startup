@@ -99,36 +99,6 @@ const verifyAuth = async (req, res, next) => {
         res.status(401).send({ msg: 'Unauthorized' });
     }
 };
-/*
-// Endpoints 
-app.post('/api/auth/create', async (req, res) => {
-    if (await findUser('username', req.body.username)) {
-        res.status(409).send({ msg: 'Existing user' });
-    } else {
-        const user = await createUser(req.body.username, req.body.password);
-        setAuthCookie(res, user.token);
-        res.send({ username: user.username });
-    }
-});
-
-app.post('/api/auth/login', async (req, res) => {
-    const user = await findUser('username', req.body.username);
-    if (user && await bcrypt.compare(req.body.password, user.password)) {
-        user.token = uuid.v4();
-        setAuthCookie(res, user.token);
-        res.send({ username: user.username });
-    } else {
-        res.status(401).send({ msg: 'Unauthorized' });
-    }
-});
-
-app.delete('/api/auth/logout', (req, res) => {
-    const user = users.find((u) => u.token === req.cookies[authCookieName]);
-    if (user) delete user.token;
-    res.clearCookie(authCookieName);
-    res.status(204).end();
-});
-*/
 
 //Get wishlist
 apiRouter.get('/wishlist', verifyAuth, (req, res) => {
@@ -157,6 +127,24 @@ apiRouter.delete('/wishlist/:id', verifyAuth, (req, res) => {
     wishlists[token] = (wishlists[token] || []).filter(item => item.id !== productId);
     res.send(wishlists[token]);
 });
+ //Reset password 
+ apiRouter.post('/auth/reset-password', async (req, res) => {
+    const { username, newPassword } = req.body;
+    const user = await findUser('username', username);
+  
+    if (!user) {
+      return res.status(404).send({ msg: 'User not found' });
+    }
+  
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await usersCollection().updateOne(
+      { username: username },
+      { $set: { password: hashedPassword } }
+    );
+  
+    res.send({ msg: 'Password reset successful' });
+  });
+  
 
 
 app.use((err, req, res, next) => {
