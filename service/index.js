@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
+const cors = require('cors'); 
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -11,6 +12,10 @@ const authCookieName = 'token';
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public')); 
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 
 let users = [];
 let wishlists = {}; // { token: [wishlistItems] }
@@ -46,8 +51,12 @@ apiRouter.post('/auth/create', async (req, res) => {
 apiRouter.post('/auth/login', async (req, res) => {
     const user = await findUser('username', req.body.username);
     if (user && await bcrypt.compare(req.body.password, user.password)) {
-      user.token = uuid.v4();
-      setAuthCookie(res, user.token);
+      const newToken = uuid.v4();
+      await usersCollection().updateOne(
+        { username: user.username },
+        { $set: { token: newToken } }
+      );
+      setAuthCookie(res, newToken);
       res.send({ username: user.username });
     } else {
       res.status(401).send({ msg: 'Unauthorized' });
@@ -85,7 +94,7 @@ function setAuthCookie(res, authToken) {
     res.cookie(authCookieName, authToken, {
         secure: false, 
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'lax',
     });
 }
 
@@ -102,8 +111,9 @@ const verifyAuth = async (req, res, next) => {
 };
 
 //Get wishlist
-apiRouter.get('/wishlist', verifyAuth, (req, res) => {
+apiRouter.get('/wishlist', verifyAuth, async (req, res) => {
     const token = req.cookies[authCookieName];
+    const items = await wishlistsCollection().find({ token }).toArray();
     res.send(items.map(i => i.product));
   });
 
