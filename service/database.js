@@ -19,5 +19,19 @@ function usersCollection() {
 function wishlistsCollection() {
   return db.collection('wishlists');
 }
+// Test the connection when this file is run directly
+if (require.main === module) {
+  (async () => {
+    try {
+      await connect();
+      await db.command({ ping: 1 });
+      console.log(' MongoDB successful!');
+    } catch (err) {
+      console.error('MongoDB failed:', err.message);
+    } finally {
+      await client.close();
+    }
+  })();
+}
 
 module.exports = { connect, usersCollection, wishlistsCollection };

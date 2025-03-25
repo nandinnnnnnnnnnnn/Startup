@@ -103,30 +103,34 @@ const verifyAuth = async (req, res, next) => {
 //Get wishlist
 apiRouter.get('/wishlist', verifyAuth, (req, res) => {
     const token = req.cookies[authCookieName];
-    res.send(wishlists[token] || []);
-});
+    res.send(items.map(i => i.product));
+  });
 
 //Add to wishlist 
-apiRouter.post('/wishlist', verifyAuth, (req, res) => {
+apiRouter.post('/wishlist', verifyAuth, async (req, res) => {
     const token = req.cookies[authCookieName];
-    wishlists[token] = wishlists[token] || [];
+    //wishlists[token] = wishlists[token] || [];
     const product = req.body;
 
     //Check if product already in wishlist
-    if (!wishlists[token].some(item => item.id === product.id)) {
-        wishlists[token].push(product); //Add if not duplicate!!!!
+    const exists = await wishlistsCollection().findOne({ token, 'product.id': product.id });
+    if (!exists) {
+      await wishlistsCollection().insertOne({ token, product });
     }
-
-    res.send(wishlists[token]);
+  
+    const items = await wishlistsCollection().find({ token }).toArray();
+    res.send(items.map(i => i.product));
 });
 
 //Remove item from wishlist
-apiRouter.delete('/wishlist/:id', verifyAuth, (req, res) => {
+apiRouter.delete('/wishlist/:id', verifyAuth, async (req, res) => {
     const token = req.cookies[authCookieName];
     const productId = parseInt(req.params.id);
-    wishlists[token] = (wishlists[token] || []).filter(item => item.id !== productId);
-    res.send(wishlists[token]);
-});
+    await wishlistsCollection().deleteOne({ token, 'product.id': productId });
+    const items = await wishlistsCollection().find({ token }).toArray();
+    res.send(items.map(i => i.product));
+
+  });
  //Reset password 
  apiRouter.post('/auth/reset-password', async (req, res) => {
     const { username, newPassword } = req.body;
