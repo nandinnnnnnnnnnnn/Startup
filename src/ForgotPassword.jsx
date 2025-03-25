@@ -8,26 +8,31 @@ function ForgotPassword() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const navigate = useNavigate();
-
+    
     const handleReset = async (e) => {
         e.preventDefault();
-
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-        const userIndex = users.findIndex(user => user.username === username);
-
-        if (userIndex === -1) {
-            setError("User not found!");
-            return;
-        }
-
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(newPassword, salt);
-        users[userIndex].password = hashedPassword;
-
-        localStorage.setItem("users", JSON.stringify(users));
-        setSuccess("Password reset successfully! You can now login.");
+        setError("");
+        setSuccess("");
+        try {
+            const response = await fetch("/api/auth/reset-password", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username, newPassword }),
+            });
         
-        setTimeout(() => navigate("/login"), 2000); // Redirect to login after 2 seconds
+            if (response.ok) {
+              setSuccess("Password reset successfully! You can now login.");
+              setTimeout(() => navigate("/login"), 2000);
+            } else {
+              const result = await response.json();
+              setError(`Error: ${result.msg}`);
+            }
+          } catch (err) {
+            console.error("Password reset error:", err);
+            setError("Error: Network issue");
+          }
+        };
+        
     };
 
     return (
