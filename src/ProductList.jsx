@@ -17,8 +17,13 @@ function ProductList({user}) {
     useEffect(() => {
         if (user) {
             fetch('/api/wishlist', { credentials: 'include' })
-                .then(res => res.json())
-                .then(data => setWishlist(data))
+            .then(res => {
+                if (!res.ok) throw new Error("Unauthorized");
+                return res.json();
+            })
+                .then(data => {if (Array.isArray(data)) setWishlist(data);
+                    else throw new Error ("Invalid wishlist response");
+                })
                 .catch(() => setWishlist([]));
         }
     }, [user]);

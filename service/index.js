@@ -91,6 +91,7 @@ function setAuthCookie(res, authToken) {
 
 // Middleware
 const verifyAuth = async (req, res, next) => {
+  console.log("Cookie:", req.cookies[authCookieName]);
     const user = await findUser('token', req.cookies[authCookieName]);
     if (user) {
         req.user = user;

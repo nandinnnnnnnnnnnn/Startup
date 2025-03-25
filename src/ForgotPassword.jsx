@@ -8,7 +8,7 @@ function ForgotPassword() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const navigate = useNavigate();
-    
+
     const handleReset = async (e) => {
         e.preventDefault();
         setError("");
@@ -33,8 +33,6 @@ function ForgotPassword() {
           }
         };
         
-    };
-
     return (
         <div className="login-container">
             <div className="login-box">
@@ -61,6 +59,6 @@ function ForgotPassword() {
             </div>
         </div>
     );
-}
 
+}
 export default ForgotPassword;
