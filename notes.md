@@ -55,4 +55,19 @@
 **Securing Passwords using bcryptjs and checking login credentials properly in the backend
 **Combining React with Express Backend smoothly for full-stack app.
 
+---
+## ***Update^^: March 25, 2025***
+## ** DB/Login Delovarable:
+## **🔍 Challenges faced**
+**- Wishlist not showing after login** – I struggled for a while figuring out why wishlist items weren’t showing after logging in. It turned out to be a mix of `fetch` timing, token mismatch, and FakeStore product ID mismatches. Eventually fixed by debugging backend responses, comparing tokens, and syncing frontend state.
+**- CORS and cookie issues** – At first, cookies were not sent with `fetch` requests in production. I had to configure `cors` middleware in Express with `credentials: true` and set the `origin` properly to match the deployed frontend.
+**- Dealing with async rendering** – React components like `ProductList` were rendering before the wishlist was fetched, causing UI mismatches. I solved this by using a `wishlistLoaded` flag to ensure proper render order.
+**- Backend crash during deployment** – Missing modules like `cookie-parser` and permission errors (`npm ERR! EACCES`) caused server crashes. I fixed this by resetting `.npm` permissions and explicitly installing missing dependencies.
+**- Deployment styling issue** – I got a MIME type error because the browser tried to load a non-existent `app.css`. It was fixed by removing the incorrect `<link>` tag in `index.html` and letting Vite bundle styles correctly.
+### **📌 Key Things I Learned**
+**- Full Express + MongoDB API flow** – Built and deployed secure routes for login, signup, wishlist saving, and logout.
+**- Cookie-based Auth** – How to set secure cookies and use them to identify users and protect routes (with `verifyAuth` middleware).
+
+
+
 💖 Made with love by Nandintsetseg Batsaikhan – "Gift-giving, made simple and magical!" 🎁✨

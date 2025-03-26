@@ -107,6 +107,12 @@ For this delibarable I added backend integrationts:
     - Wishlist (/api/wishlist) is a restricted endpoints shows "Unauthorized" if not logged in.
 
 ---
+## 📌 **DB/Login Delivarable**  
+For this deliverable, I implemented:  
+✅ **Stores data in MongoDB** – Wishlist products are stored in MongoDB Atlas in the wishlists collection through the backend service in database.js.  
+✅ **Stores credentials in MongoDB** – User credentials ( username, hashed password, and auth token) are stored  in the users collection in MongoDB in database.js.  
+
+---
 ## **📌 Third-Party API Integration**
 Giftly integrates with **[Fake Store API](https://fakestoreapi.com/)** to fetch real-time product data.  
 Future integrations include **Amazon Product API** for adding real gifts directly to wish lists.
