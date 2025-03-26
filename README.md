@@ -5,7 +5,7 @@
 ---
 
 ## **🚀 Elevator Pitch**
-🎁 **Tired of guessing what gifts your loved ones want?**  
+**Tired of guessing what gifts your loved ones want?**  
 With **Giftly**, you can **create, manage, and share wish lists** effortlessly. Whether for birthdays, holidays, or special occasions, Giftly takes the stress out of gift-giving.
 
 ---
@@ -17,9 +17,6 @@ With **Giftly**, you can **create, manage, and share wish lists** effortlessly. 
 ### **Search Page UI**
 ![Search Page](public/images/Search.png)
 
-### **Wishlist Page UI**
-![Wishlist Page](public/images/Wishlist.png)
-
 ---
 
 ## **✨ Key Features**
@@ -29,18 +26,6 @@ With **Giftly**, you can **create, manage, and share wish lists** effortlessly. 
 - **Wishlist Page** – Users can now view and manage their wishlists in a wishlist page.  
 - **Database Storage (Planned)**. 
 
----
-## **🛠️ Technologies Used**
-| Technology | Purpose |
-|------------|---------|
-| **HTML** | Structured login, dashboard, and wish list pages. |
-| **CSS & Bootstrap** | Created responsive UI. |
-| **React.js** | Component-based UI framework |
-| **Vite** | Fast builds and optimized performance |
-| **bcryptjs** | Secure password encryption |
-| **Caddy** | Web server for hosting |
-| **AWS EC2** | Deployment and hosting |
-| **Database & WebSockets (Planned)** | Real-time wish list updates & data storage from Amazon ^^. |  
 
 ---
 ## **HTML deliverable**
@@ -118,15 +103,11 @@ Giftly integrates with **[Fake Store API](https://fakestoreapi.com/)** to fetch 
 Future integrations include **Amazon Product API** for adding real gifts directly to wish lists.
 
 ---
-## **📌  WebSocket (Temporary)
+## **📌 WebSocket (Temporary)
 
 Currently, Giftly uses a **simulated WebSocket feature** using timed notifications to mimic real-time updates when a user adds an item to their wishlist. This prepares for future WebSocket integration for real-time gift updates and collaborative wishlists.
 
 Planned future update:Real WebSocket server with live user interaction.
--- 
-
-## **📎 Links & Resources**
-🔗 **GitHub Repository:** [Giftly Repository](https://github.com/nandinnnnnnnnnnnn/Startup)  
 
 ---
 
