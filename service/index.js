@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const cors = require('cors'); 
+const { peerProxy } = require('./peerproxy'); 
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -165,4 +166,5 @@ apiRouter.delete('/wishlist/:id', verifyAuth, async (req, res) => {
 app.use((err, req, res, next) => {
     res.status(500).send({ type: err.name, message: err.message });
 });
+peerproxy(server);
 app.listen(port, () => console.log(`Listening on port ${port}`));
