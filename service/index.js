@@ -3,7 +3,8 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const cors = require('cors'); 
-const { peerProxy } = require('./peerproxy'); 
+const http = require('http');
+const { peerproxy } = require('./peerproxy'); 
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;

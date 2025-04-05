@@ -127,11 +127,38 @@ function App() {
         localStorage.setItem("user", username);
     };
 
+
+    //web socket connection
+    useEffect(() => {
+        const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+        const socket = new WebSocket(`${protocol}://${window.location.host}`);
+      
+        socket.onmessage = (event) => {
+          const message = event.data;
+          console.log("Received:", message);
+          setNotifications(prev => [...prev, message]);
+        };
+      
+        return () => {
+          socket.close();
+        };
+      }, []);
+
+      
   return (
       <Router>
            <div className="page-wrapper">
                 <Navbar user={user} onLogout={handleLogout} />
 
+                {/* Notification Bar */}
+                {notifications.length > 0 && (
+                    <div className="notification-bar">
+                        {notifications.map((msg, idx) => (
+                            <div key={idx} className="notification">{msg}</div>
+                        ))}
+                    </div>
+                )}
+                
               <Routes>
                   <Route path="/" element={<Home user={user} />} /> 
                   <Route path="/about" element={<About />} />
