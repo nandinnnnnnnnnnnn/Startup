@@ -5,6 +5,7 @@ function ProductList({user}) {
     const [wishlist, setWishlist] = useState([]);
     const [alertMessage, setAlertMessage] = useState(null);
     const [alertType, setAlertType] = useState(null);
+    const [ws, setWs] = useState(null);
 
     useEffect(() => {
         fetch("https://fakestoreapi.com/products") 
@@ -12,6 +13,15 @@ function ProductList({user}) {
             .then((data) => setProducts(data))
             .catch((error) => console.error("Error fetching products:", error));
     }, []);
+
+    // WebSocket connection on component mount
+    useEffect(() => {
+        const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+        const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+        setWs(socket);
+    
+        return () => socket.close();
+      }, []);
 
 // Fetch wishlist if user logged in
     useEffect(() => {
@@ -78,6 +88,9 @@ function ProductList({user}) {
             const updatedWishlist = await response.json();
             setWishlist(updatedWishlist); 
             showAlert("😊Item added to wishlist😊!", "success");
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(`😊${user} added: ${product.title}`); 
+              }    
           } else {
             showAlert('Failed to add to wishlist. Please try again.');
           }
@@ -89,7 +102,7 @@ function ProductList({user}) {
             showAlert("🤖You must be logged in to remove items from your wishlist🤖!");
             return;
         }
-
+        const removedItem = wishlist.find(item => item.id === productId);
         const response = await fetch(`/api/wishlist/${productId}`, {
             method: 'DELETE',
             credentials: 'include',
@@ -99,7 +112,9 @@ function ProductList({user}) {
             const updatedWishlist = await response.json();
             setWishlist(updatedWishlist); //update wishlist from backend
             showAlert("😔Item removed from wishlist😔!", "success");
-
+        if (ws && ws.readyState === WebSocket.OPEN && removedItem) {
+            ws.send(`❌ ${user} removed: ${removedItem.title}`);
+         }
         } else {
             showAlert('Failed to remove from wishlist. Please try again.');
         }

@@ -131,12 +131,12 @@ function App() {
     //web socket connection
     useEffect(() => {
         const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-        const socket = new WebSocket(`${protocol}://${window.location.host}`);
+        const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
       
-        socket.onmessage = (event) => {
-          const message = event.data;
-          console.log("Received:", message);
-          setNotifications(prev => [...prev, message]);
+        socket.onmessage = async (event) => {
+          const text = await event.data.text();
+          console.log("Received:", text);
+          setNotifications(prev => [...prev, text]);
         };
       
         return () => {
