@@ -1,31 +1,20 @@
 const { WebSocketServer } = require('ws');
 
 function peerProxy(httpServer) {
-  const socketServer = new WebSocketServer({ server: httpServer });
+  const wss = new WebSocketServer({ server: httpServer, path: '/ws' });
 
-  socketServer.on('connection', (socket) => {
-    socket.isAlive = true;
+  wss.on('connection', (ws) => {
+    console.log('WebSocket client connected');
 
-    socket.on('message', function message(data) {
-      socketServer.clients.forEach((client) => {
-        if (client !== socket && client.readyState === socket.OPEN) {
-          client.send(data);
+    ws.on('message', (data) => {
+      // Broadcast to all other clients
+      wss.clients.forEach((client) => {
+        if (client !== ws && client.readyState === ws.OPEN) {
+          client.send(data.toString());
         }
       });
     });
-
-    socket.on('pong', () => {
-      socket.isAlive = true;
-    });
   });
-
-  setInterval(() => {
-    socketServer.clients.forEach((client) => {
-      if (client.isAlive === false) return client.terminate();
-      client.isAlive = false;
-      client.ping();
-    });
-  }, 10000);
 }
 
 module.exports = { peerProxy };
