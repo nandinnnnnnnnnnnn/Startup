@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -56,7 +56,7 @@ function Login({ onLogin }) {
           <button type="submit" className="custom-btn">Login</button>
         </form>
         <p className="signup-link">
-          Forgot your password? <a href="/forgot-password">Reset it</a>
+          Forgot your password? <Link to="/forgot-password">Reset it</Link>
         </p>
       </div>
     </div>

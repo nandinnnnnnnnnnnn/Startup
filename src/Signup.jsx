@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup({ onSignup }) {
     const [username, setUsername] = useState("");
@@ -71,7 +71,7 @@ function Signup({ onSignup }) {
                     <button type="submit" className="custom-btn">Sign Up</button>
                 </form>
                 <p className="signup-link">
-                    Already have an account? <a href="/login">Login</a>
+                    Already have an account? <Link to="/login">Login</Link>
                 </p>
             </div>
         </div>

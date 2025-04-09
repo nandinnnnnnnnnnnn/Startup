@@ -131,8 +131,18 @@ function App() {
     //web socket connection
     useEffect(() => {
         const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-        const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-      
+        const socketUrl = `${protocol}://${window.location.host}/ws`;
+        console.log("Connecting to WebSocket:", socketUrl);
+
+        const socket = new WebSocket(socketUrl);
+        socket.onopen = () => {
+             console.log("🟢WebSocket connected!");
+     };
+
+        socket.onerror = (err) => {
+            console.error("WebSocket connection error:", err);
+        };
+            
         socket.onmessage = (event) => {
           const text = event.data;
           console.log("Received:", text);
