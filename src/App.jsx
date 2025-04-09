@@ -17,7 +17,7 @@ import carousel2 from "/images/giftbear.jpg";
 
 // Home Page Comp
 function Home({ user }) {
-    useEffect(() => {
+    useEffect(() => {      
         setTimeout(() => {
             const carouselElement = document.querySelector("#carouselExampleRide");
             if (carouselElement) {
@@ -133,8 +133,8 @@ function App() {
         const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
         const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
       
-        socket.onmessage = async (event) => {
-          const text = await event.data.text();
+        socket.onmessage = (event) => {
+          const text = event.data;
           console.log("Received:", text);
           setNotifications(prev => [...prev, text]);
         };
@@ -150,7 +150,9 @@ function App() {
            <div className="page-wrapper">
                 <Navbar user={user} onLogout={handleLogout} />
 
-                {/* Notification Bar */}
+
+
+                {/* Notification Bar 
                 {notifications.length > 0 && (
                     <div className="notification-bar">
                         {notifications.map((msg, idx) => (
@@ -158,7 +160,7 @@ function App() {
                         ))}
                     </div>
                 )}
-                
+                */}
               <Routes>
                   <Route path="/" element={<Home user={user} />} /> 
                   <Route path="/about" element={<About />} />
