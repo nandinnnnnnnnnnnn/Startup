@@ -68,6 +68,16 @@
 **- Full Express + MongoDB API flow** – Built and deployed secure routes for login, signup, wishlist saving, and logout.
 **- Cookie-based Auth** – How to set secure cookies and use them to identify users and protect routes (with `verifyAuth` middleware).
 
+---
+## ***Update^^: Apr 8, 2025***
+## ** Websocket Delivrable:
+## **🔍 Challenges faced**
+- WebSocket 404 error – Took a while to realize that /ws isn’t a normal HTTP route. Fixed it by setting the correct path in peerProxy.js and moving the WebSocket setup before app.use.
+- Caddy handle_path issue – WebSocket wasn’t connecting in production. Switching from handle_path to handle and preserving /ws path fixed it.
+### **📌 Key Things I Learned**
+- How to set up real-time updates – Used WebSocket to sync wishlist changes across clients instantly.
+- How to proxy WebSocket connections – Configured both Vite and Caddy to support /ws properly.
+- Better Debugging for sure. 
 
 
-💖 Made with love by Nandintsetseg Batsaikhan – "Gift-giving, made simple and magical!" 🎁✨
+💖 Made with love by Nandintsetseg Batsaikhan – "Gift-giving, made simple and magical!" 

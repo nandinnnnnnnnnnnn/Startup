@@ -103,11 +103,14 @@ Giftly integrates with **[Fake Store API](https://fakestoreapi.com/)** to fetch 
 Future integrations include **Amazon Product API** for adding real gifts directly to wish lists.
 
 ---
-## **📌 WebSocket (Temporary)
+## **📌 WebSocket Deliverable
+For this deliverable, I implemented:  
+✅ **Backend listens for WebSocket connection  **
+✅  **Frontend makes WebSocket connection ** The frontend connects to the WebSocket endpoint (/ws) using the WebSocket API and stays connected for real-time updates.
+✅  **Data sent over WebSocket connection ** When a user adds or removes an item from the wishlist, the frontend sends a WebSocket message to the backend, which is then broadcast to all other connected clients.
+✅  **WebSocket data displayed in the application interface **
+✅  **The application is functional **
 
-Currently, Giftly uses a **simulated WebSocket feature** using timed notifications to mimic real-time updates when a user adds an item to their wishlist. This prepares for future WebSocket integration for real-time gift updates and collaborative wishlists.
-
-Planned future update:Real WebSocket server with live user interaction.
 
 ---
 
