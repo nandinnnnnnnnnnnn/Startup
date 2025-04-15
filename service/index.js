@@ -1,23 +1,25 @@
 const express = require('express');
+const http = require('http');
+const { WebSocketServer } = require('ws');
+const { peerProxy } = require('./peerProxy');
+const app = express();
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
-const cors = require('cors'); 
-const http = require('http');
-const { peerProxy } = require('./peerProxy'); 
+//const cors = require('cors');  // dont use cors
 
-const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 const authCookieName = 'token';
 
-
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static('public')); 
-app.use(cors({
-  origin: 'https://startup.justgiftly.com',
-  credentials: true
-}));
+//app.use(express.static('dist')); 
+app.use(express.static('dist')); // serve Vite build
+
+ //app.use(cors({
+  //rigin: 'https://startup.justgiftly.com',
+  //credentials: true
+//}));
 
 let users = [];
 let wishlists = {}; // { token: [wishlistItems] }
@@ -161,12 +163,21 @@ apiRouter.delete('/wishlist/:id', verifyAuth, async (req, res) => {
   
     res.send({ msg: 'Password reset successful' });
   });
-  
 
+  // Serve index.html for all non-API requests to support SPA routing
+const path = require('path');
+app.use((req, res, next) => {
+  if (req.method === 'GET' && !req.path.startsWith('/api') && !req.path.startsWith('/ws')) {
+    res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+  } else {
+    next();
+  }
+});
 
 app.use((err, req, res, next) => {
     res.status(500).send({ type: err.name, message: err.message });
 });
 const httpServer = http.createServer(app);
 peerProxy(httpServer);
-httpServer.listen(port, () => {console.log(`Listening on port ${port}`)});
+
+httpServer.listen(4000, () => {console.log(`Listening on port ${port}`);});
